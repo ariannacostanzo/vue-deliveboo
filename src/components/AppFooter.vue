@@ -34,12 +34,10 @@ export default {
                 </div>
             </div>
             <div class="copyright text-center text-md-end">
-                © 2024 Nome Deliveboo. Tutti i diritti riservati.
+                © 2024 Deliveboo. Tutti i diritti riservati.
             </div>
         </div>
     </footer>
 </template>
 
-<style lang='scss' scoped>
-/* style here */
-</style>
+<style lang='scss'></style>
