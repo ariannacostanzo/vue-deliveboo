@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <main class="container-sm border">
+    <main class="container-sm ">
         <!--searchbar-->
         <div class="input-group mb-3 mt-4">
             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fas fa-search"></i></span>
