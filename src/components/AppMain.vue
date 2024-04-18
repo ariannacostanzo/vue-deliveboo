@@ -7,11 +7,11 @@ export default {
 <template>
     <main class="container-sm ">
         <!--searchbar-->
-        <div class="input-group mb-3 mt-4">
+        <!-- <div class="input-group mb-3 mt-4">
             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fas fa-search"></i></span>
             <input type="text" class="form-control" placeholder="cerca il tuo ristorante" aria-label="Username"
                 aria-describedby="basic-addon1">
-        </div>
+        </div> -->
 
         <!--buttons-->
         <div class="buttons-container">
