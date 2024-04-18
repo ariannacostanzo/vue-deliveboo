@@ -9,7 +9,7 @@ export default {
         <div class="footer-content">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="logo mb-3 mb-md-0">
-                    <img src="" alt="Logo" width="100">
+                    <img src="../assets/logo-deliveboo.png" alt="Logo" width="100">
                 </div>
                 <div class="social-icons mb-3 mb-md-0">
                     <ul class="d-flex justify-content-center justify-content-md-start">

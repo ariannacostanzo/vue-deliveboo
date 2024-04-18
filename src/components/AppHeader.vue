@@ -8,7 +8,7 @@ export default {
     <header class="container-sm">
         <nav class="navbar">
             <a class="navbar-brand" href="#">
-                <img src="" alt="LOGO">
+                <img src="../assets/logo-deliveboo.png" alt="LOGO">
             </a>
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>

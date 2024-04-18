@@ -1,7 +1,7 @@
 @use "vars" as *;
 
 footer {
-  background-color: $engeneering-orange; /* Colore arancione */
+  background-color: $princeton-orange;
   padding: 20px;
   color: $white-color;
   margin-top: 50px;
@@ -13,6 +13,7 @@ footer {
 
 .logo img {
   max-width: 100px;
+  // cambiare il colore del logo in bianco
 }
 
 .social-icons ul,

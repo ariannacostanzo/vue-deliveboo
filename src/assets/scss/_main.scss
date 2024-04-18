@@ -6,13 +6,13 @@
 }
 
 .input-group-text {
-  background-color: $engeneering-orange;
-  border-color: $engeneering-orange;
+  background-color: $princeton-orange;
+  border-color: $princeton-orange;
   color: $white-color;
 }
 
 .form-control {
-  border-color: $engeneering-orange;
+  border-color: $princeton-orange;
 }
 
 // Buttons
@@ -23,7 +23,7 @@
 }
 
 .button {
-  background-color: $engeneering-orange;
+  background-color: $princeton-orange;
   color: $white-color;
   border: none;
   padding: 10px 20px;
@@ -40,7 +40,7 @@
 }
 
 .card-title {
-  color: $engeneering-orange;
+  color: $princeton-orange;
   font-family: $roboto-condensed;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .work-with-us h2 {
-  color: $engeneering-orange;
+  color: $princeton-orange;
   font-family: $roboto-condensed;
   font-size: 24px;
   margin-bottom: 10px;
@@ -73,7 +73,7 @@
 }
 
 .partner-button {
-  background-color: $engeneering-orange;
+  background-color: $princeton-orange;
   color: $white-color;
   font-family: $open-sans;
   font-size: 16px;
@@ -85,5 +85,5 @@
 }
 
 .partner-button:hover {
-  background-color: darken($engeneering-orange, 10%);
+  background-color: darken($princeton-orange, 10%);
 }
