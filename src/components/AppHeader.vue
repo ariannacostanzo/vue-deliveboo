@@ -8,7 +8,7 @@ export default {
     <header class="container-sm">
         <nav class="navbar">
             <a class="navbar-brand" href="#">
-                <img src="" alt="LOGO" width="100" height="auto">
+                <img src="" alt="LOGO">
             </a>
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
