@@ -18,6 +18,6 @@ export default {
 
 </template>
 
-<style lang='scss' scoped>
-/* style here */
+<style lang='scss'>
+@import './assets/scss/app.scss'
 </style>

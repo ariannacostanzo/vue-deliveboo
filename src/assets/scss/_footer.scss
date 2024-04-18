@@ -1,0 +1,49 @@
+@use "vars" as *;
+
+footer {
+  background-color: $engeneering-orange; /* Colore arancione */
+  padding: 20px;
+  color: $white-color;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  max-width: 100px;
+}
+
+.social-icons ul,
+.store-icons ul {
+  list-style-type: none;
+  padding: 0;
+  gap: 2rem;
+}
+
+.social-icons li i,
+.store-icons li i {
+  font-size: 2rem;
+}
+
+.footer-links ul {
+  list-style-type: none;
+  padding: 0;
+  gap: 2rem;
+}
+
+.footer-links li {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer-links li:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  font-size: 14px;
+  text-align: right;
+}

@@ -1,0 +1,44 @@
+@use "vars" as *;
+
+header {
+  background-color: $engeneering-orange;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand img {
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  transform: scale(1.1);
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-counter {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: $engeneering-orange;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+}

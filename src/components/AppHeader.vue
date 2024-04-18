@@ -5,18 +5,19 @@ export default {
 </script>
 
 <template>
-    <header class="container-sm border">
+    <header class="container-sm">
         <nav class="navbar">
             <a class="navbar-brand" href="#">
-                <img src="" alt="LOGO" width="30" height="24">
+                <img src="" alt="LOGO">
             </a>
-            <div>Carrello <i class="fa-solid fa-cart-shopping"></i></div>
-            <!-- <div>Lavora con noi</div> -->
-        </nav>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
 
+                <!-- implementare counter -->
+                <span class="cart-counter">0</span>
+            </div>
+        </nav>
     </header>
 </template>
 
-<style lang='scss' scoped>
-/* style here */
-</style>
+<style lang='scss' scoped></style>
