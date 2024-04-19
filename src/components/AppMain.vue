@@ -5,13 +5,13 @@ export default {
 </script>
 
 <template>
-    <main class="container-sm ">
+    <main class="">
         <!--searchbar-->
-        <div class="input-group mb-3 mt-4">
+        <!-- <div class="input-group mb-3 mt-4">
             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fas fa-search"></i></span>
             <input type="text" class="form-control" placeholder="cerca il tuo ristorante" aria-label="Username"
                 aria-describedby="basic-addon1">
-        </div>
+        </div> -->
 
         <!--buttons-->
         <div class="buttons-container">
@@ -53,8 +53,10 @@ export default {
                 </div>
             </div>
         </div>
+        <div class="food-delivery mt-3">
 
-        <div class="work-with-us">
+        </div>
+        <div class="work-with-us container-sm">
             <h2>Lavora con noi - Ristoratori</h2>
             <p>Diventa parte del nostro team e unisciti alla nostra rete di ristoranti partner.</p>
             <button class="partner-button">Diventa Partner</button>
@@ -64,5 +66,12 @@ export default {
 </template>
 
 <style lang='scss' scoped>
-/* style here */
+.food-delivery {
+    background-image: url("../assets/food-delivery.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    opacity: 0.9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
 </style>

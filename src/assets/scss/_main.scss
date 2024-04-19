@@ -2,17 +2,17 @@
 
 // Search bar
 .input-group {
-  margin-top: 20px;
+  padding: 0rem 3rem;
 }
 
 .input-group-text {
-  background-color: $engeneering-orange;
-  border-color: $engeneering-orange;
+  background-color: $princeton-orange;
+  border-color: $princeton-orange;
   color: $white-color;
 }
 
 .form-control {
-  border-color: $engeneering-orange;
+  border-color: $princeton-orange;
 }
 
 // Buttons
@@ -23,24 +23,28 @@
 }
 
 .button {
-  background-color: $engeneering-orange;
+  background-color: $princeton-orange;
   color: $white-color;
   border: none;
   padding: 10px 20px;
   margin-right: 10px;
   cursor: pointer;
   font-family: $open-sans;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 // Info boxes
 .card {
   margin-top: 20px;
   border: none;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .card-title {
-  color: $engeneering-orange;
+  color: $princeton-orange;
   font-family: $roboto-condensed;
 }
 
@@ -55,11 +59,11 @@
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .work-with-us h2 {
-  color: $engeneering-orange;
+  color: $princeton-orange;
   font-family: $roboto-condensed;
   font-size: 24px;
   margin-bottom: 10px;
@@ -73,7 +77,7 @@
 }
 
 .partner-button {
-  background-color: $engeneering-orange;
+  background-color: $princeton-orange;
   color: $white-color;
   font-family: $open-sans;
   font-size: 16px;
@@ -85,5 +89,5 @@
 }
 
 .partner-button:hover {
-  background-color: darken($engeneering-orange, 10%);
+  background-color: darken($princeton-orange, 10%);
 }

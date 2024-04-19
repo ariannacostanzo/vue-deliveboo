@@ -5,11 +5,11 @@ export default {
 </script>
 
 <template>
-    <footer class="container-sm">
-        <div class="footer-content">
+    <footer class="">
+        <div class="footer-content container-sm">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="logo mb-3 mb-md-0">
-                    <img src="" alt="Logo" width="100">
+                    <img src="../assets/logo-deliveboo.png" alt="Logo" width="100">
                 </div>
                 <div class="social-icons mb-3 mb-md-0">
                     <ul class="d-flex justify-content-center justify-content-md-start">
@@ -34,12 +34,10 @@ export default {
                 </div>
             </div>
             <div class="copyright text-center text-md-end">
-                © 2024 Nome Deliveboo. Tutti i diritti riservati.
+                © 2024 Deliveboo. Tutti i diritti riservati.
             </div>
         </div>
     </footer>
 </template>
 
-<style lang='scss' scoped>
-/* style here */
-</style>
+<style lang='scss'></style>
