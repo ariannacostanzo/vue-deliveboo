@@ -31,7 +31,7 @@ export default {
             <div class="d-flex justify-content-center row gap-4 mt-4">
                 <!--quality-->
                 <div class="card pt-3" style="width: 18rem;">
-                    <img src="../assets/quality.jpeg" class="card-img-top" alt="...">
+                    <img src="../assets/quality.jpeg" class="card-img-top" alt="food-quality">
                     <div class="card-body">
                         <h5 class="card-title">Qualità</h5>
                         <p class="card-text">Abbiamo stretto collaborazioni solo con i migliori ristoranti della
@@ -57,7 +57,7 @@ export default {
 
                 <!--new-->
                 <div class="card pt-3" style="width: 18rem;">
-                    <img src="../assets/friends.jpeg" class="card-img-top" alt="...">
+                    <img src="../assets/friends.jpeg" class="card-img-top" alt="friends-eating">
                     <div class="card-body">
                         <h5 class="card-title">Novità</h5>
                         <p class="card-text">Lasciati trasportare in un viaggio senza confini: dalla cucina di casa
@@ -75,21 +75,27 @@ export default {
 
 
         <!--buttons to download the app-->
-        <div class="py-5 mt-5">
-            <h2 class="text-center">Scarica la nostra app!</h2>
-            <div class="buttons-container">
-                <!-- app store -->
-                <a class="button text-decoration-none">
-                    <i class="fab fa-app-store"></i>
-                    App Store
-                </a>
-                <!-- google play -->
-                <a class="button text-decoration-none">
-                    <i class="fab fa-google-play"></i>
-                    Google Play
-                </a>
+        <div class="py-5 mt-5 d-flex justify-content-center gap-5">
+
+            <div class="align-self-center">
+                <h2 class="text-center">Scarica la nostra app!</h2>
+                <div class="buttons-container">
+                    <!-- app store -->
+                    <a class="button text-decoration-none">
+                        <i class="fab fa-app-store"></i>
+                        App Store
+                    </a>
+                    <!-- google play -->
+                    <a class="button text-decoration-none">
+                        <i class="fab fa-google-play"></i>
+                        Google Play
+                    </a>
+                </div>
             </div>
+            <img src="../assets/food-app.jpeg" alt="app">
+
         </div>
+
 
         <!-- foto ???-->
         <!--<div class="food-delivery mt-3"></div>-->
@@ -112,7 +118,6 @@ export default {
                     </p>
                     <button class="partner-button">Diventa Partner</button>
                 </div>
-
             </div>
         </div>
 
