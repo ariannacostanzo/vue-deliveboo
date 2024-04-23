@@ -18,7 +18,7 @@ export default {
     background-image: url("../assets/jumbotron-image.jpg");
     background-size: cover;
     background-position: center;
-    height: 200px;
+    height: 600px;
     opacity: 0.9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
