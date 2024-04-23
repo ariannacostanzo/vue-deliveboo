@@ -88,11 +88,23 @@ export default {
         <div class="food-delivery mt-3">
 
         </div>
-        <div class="work-with-us container-sm">
-            <h2>Lavora con noi - Ristoratori</h2>
-            <p>Diventa parte del nostro team e unisciti alla nostra rete di ristoranti partner.</p>
-            <button class="partner-button">Diventa Partner</button>
+        <div class="work-with-us container-sm gap-4">
+            <img src="../assets/work.jpeg" class="card-img-top" alt="work-with-us">
+            <div>
+                <h2>Lavora con noi - Ristoratori</h2>
+                <p>Vuoi far crescere il tuo business culinario? Diventa nostro partner! Con la nostra app di food
+                    delivery,
+                    avrai l'opportunità di raggiungere un vasto pubblico di clienti affamati, garantendo una visibilità
+                    senza precedenti
+                    per il tuo ristorante. Unisciti a noi per offrire ai clienti la comodità di gustare i tuoi piatti
+                    eccezionali
+                    direttamente a casa loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso!
+                </p>
+                <button class="partner-button">Diventa Partner</button>
+            </div>
+
         </div>
+
     </main>
 
 </template>
