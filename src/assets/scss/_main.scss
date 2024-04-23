@@ -23,7 +23,7 @@
 
 .button {
   background-color: $princeton-orange;
-  color: $white-color;
+  color: $black-color;
   border: none;
   padding: 10px 20px;
   margin-right: 10px;
@@ -78,12 +78,12 @@
 
 .partner-button {
   background-color: $princeton-orange;
-  color: $white-color;
+  color: $black-color;
   font-family: $open-sans;
   font-size: 16px;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
