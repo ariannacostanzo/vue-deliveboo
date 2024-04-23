@@ -27,5 +27,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .form-control {
+        max-width: 400px;
+    }
+
 }
 </style>
