@@ -8,8 +8,10 @@ export default {
     <main>
 
         <!--restaurant types buttons-->
-        <div class="py-5">
-            <h2 class="text-center">Categorie più richieste</h2>
+        <div class="types-section row py-5">
+            <div>
+                <h2 class="text-center mb-0">Categorie più richieste</h2>
+            </div>
             <div class="buttons-container">
                 <a class="button text-decoration-none">Pizzeria</a>
                 <a class="button text-decoration-none">Griglieria</a>

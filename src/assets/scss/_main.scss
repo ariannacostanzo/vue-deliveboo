@@ -19,7 +19,6 @@
 .buttons-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .button {
@@ -91,4 +90,11 @@
 
 .partner-button:hover {
   background-color: darken($princeton-orange, 10%);
+}
+
+.types-section {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
