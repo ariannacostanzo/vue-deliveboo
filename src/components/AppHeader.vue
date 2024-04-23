@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <header class="">
+    <header>
         <nav class="navbar container-sm">
             <a class="navbar-brand" href="#">
                 <img src="../assets/logo-deliveboo.png" alt="LOGO">

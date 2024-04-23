@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <main class="">
+    <main>
 
         <!--restaurant types buttons-->
         <div class="py-5">
@@ -14,8 +14,9 @@ export default {
                 <a class="button text-decoration-none">Pizzeria</a>
                 <a class="button text-decoration-none">Griglieria</a>
                 <a class="button text-decoration-none">Hamburger </a>
-                <a class="button text-decoration-none">Pizzeria</a>
+                <a class="button text-decoration-none">Sushi</a>
                 <a class="button text-decoration-none">Cinese</a>
+                <a class="button text-decoration-none">Italiano</a>
                 <a class="button text-decoration-none">Fast food </a>
                 <a class="button text-decoration-none">Kebab </a>
                 <a class="button text-decoration-none">Indiano </a>
