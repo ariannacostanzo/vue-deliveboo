@@ -7,7 +7,8 @@ export default {
         return {
             searchTerm: '',
             restaurants: [],
-            types: []
+            types: [],
+            selectedFilters: []
         };
     },
     methods: {
@@ -35,6 +36,27 @@ export default {
             } catch (error) {
                 console.error(error);
             }
+        }, toggleFilter(filter) {
+            const index = this.selectedFilters.indexOf(filter.toLowerCase());
+            if (index === -1) {
+                this.selectedFilters.push(filter.toLowerCase());
+            } else {
+                this.selectedFilters.splice(index, 1);
+            }
+        },
+        isFilterSelected(filter) {
+            return this.selectedFilters.includes(filter.toLowerCase());
+        },
+    },
+    computed: {
+        filteredRestaurants() {
+            if (this.selectedFilters.length === 0) {
+                return this.restaurants;
+            } else {
+                return this.restaurants.filter(restaurant =>
+                    restaurant.types.some(type => this.selectedFilters.includes(type.label.toLowerCase()))
+                );
+            }
         }
     },
     created() {
@@ -59,12 +81,21 @@ export default {
                 </div>
             </div>
         </div>
+
+        <!-- Box dei bottoni per il filtro -->
+        <div class="card container-sm mt-3">
+            <div class="card-body d-flex flex-wrap">
+                <button v-for="type in types" :key="type.id" @click="toggleFilter(type.label)"
+                    :class="{ 'btn btn-primary': isFilterSelected(type.label), 'btn btn-outline-primary': !isFilterSelected(type.label) }">{{
+                        type.label }}</button>
+            </div>
+        </div>
     </div>
 
     <!-- sezione visuale filtro ricerca -->
     <section class="container-sm mt-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-            <div class="col mb-4" v-for="(restaurant, index) in restaurants" :key="restaurant.id">
+            <div class="col mb-4" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
                 <div class="card">
                     <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
                     <div class="card-body">
