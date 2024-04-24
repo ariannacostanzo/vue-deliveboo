@@ -13,13 +13,11 @@ export default {
     },
     methods: {
         async searchRestaurants() {
-
             if (this.searchTerm.trim() !== '') {
                 try {
                     const response = await axios.get('http://localhost:8000/api/restaurants');
                     this.restaurants = response.data.filter(restaurant =>
-                        restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                        restaurant.types.some(type => type.label.toLowerCase().includes(this.searchTerm.toLowerCase()))
+                        restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase())
                     );
                 } catch (error) {
                     console.error(error);
@@ -36,7 +34,8 @@ export default {
             } catch (error) {
                 console.error(error);
             }
-        }, toggleFilter(filter) {
+        },
+        toggleFilter(filter) {
             const index = this.selectedFilters.indexOf(filter.toLowerCase());
             if (index === -1) {
                 this.selectedFilters.push(filter.toLowerCase());
@@ -72,8 +71,6 @@ export default {
                 <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
                 <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
                 <div class="input-group justify-content-center">
-                    <!-- <span class="input-group-text text-black" id="basic-addon1"><i
-                                class="fa-solid fas fa-search"></i></span> -->
                     <input class="form-control" placeholder="cerca il tuo ristorante" v-model="searchTerm"
                         @input="searchRestaurants">
                     <button class="btn btn-primary" @click="searchRestaurants"><i
@@ -110,7 +107,6 @@ export default {
 
 <style lang='scss' scoped>
 .card {
-
     margin-bottom: 20px;
 
     .card-img-top {
