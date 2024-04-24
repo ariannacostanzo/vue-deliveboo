@@ -12,7 +12,8 @@ export default {
                     <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
                     <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
                     <div class="input-group justify-content-center">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fas fa-search"></i></span>
+                        <span class="input-group-text text-black" id="basic-addon1"><i
+                                class="fa-solid fas fa-search"></i></span>
                         <input class="form-control" placeholder="cerca il tuo ristorante">
                     </div>
                 </div>

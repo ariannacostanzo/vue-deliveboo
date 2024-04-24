@@ -37,7 +37,7 @@ export default {
                 <div class="d-flex justify-content-center row gap-5 mt-4">
                     <!--quality-->
                     <div class="card pt-3" style="width: 18rem;">
-                        <img src="../assets/quality.jpeg" class="card-img-top" alt="food-quality">
+                        <img src="../assets/restaurant-quality.png" class="card-img-top" alt="food-quality">
                         <div class="card-body">
                             <h5 class="card-title">Qualità</h5>
                             <p class="card-text">Abbiamo stretto collaborazioni solo con i migliori ristoranti della
