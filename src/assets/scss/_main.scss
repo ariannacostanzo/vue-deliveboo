@@ -19,12 +19,11 @@
 .buttons-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .button {
   background-color: $princeton-orange;
-  color: $white-color;
+  color: $black-color;
   border: none;
   padding: 10px 20px;
   margin-right: 10px;
@@ -52,9 +51,10 @@
   color: $black-color;
 }
 
-//section Work with us section
+//section Work with us
 .work-with-us {
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
   margin-top: 50px;
   padding: 20px;
   background-color: #f9f9f9;
@@ -78,16 +78,23 @@
 
 .partner-button {
   background-color: $princeton-orange;
-  color: $white-color;
+  color: $black-color;
   font-family: $open-sans;
   font-size: 16px;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .partner-button:hover {
   background-color: darken($princeton-orange, 10%);
+}
+
+.types-section {
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
