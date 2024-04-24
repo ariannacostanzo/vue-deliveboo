@@ -10,7 +10,7 @@ footer {
 
 .logo img {
   max-width: 100px;
-  // cambiare il colore del logo in bianco
+
 }
 
 .social-icons ul,
@@ -26,7 +26,7 @@ footer {
 }
 
 .footer-links ul {
-  list-style-type: none;
+  color: $black-color;
   padding: 0;
   gap: 2rem;
 }
