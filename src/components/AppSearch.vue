@@ -12,6 +12,7 @@ export default {
     },
     methods: {
         async searchRestaurants() {
+
             if (this.searchTerm.trim() !== '') {
                 try {
                     const response = await axios.get('http://localhost:8000/api/restaurants');
@@ -23,7 +24,7 @@ export default {
                     console.error(error);
                 }
             } else {
-                // Se la barra di ricerca è vuota, imposta vuoto
+                // Se la barra di ricerca è vuota, imposta la lista dei ristoranti vuota
                 this.restaurants = [];
             }
         },
@@ -44,7 +45,7 @@ export default {
 
 <template>
     <div class="search-bar">
-        <div class="card">
+        <div class="card container-sm">
             <div class="card-body">
                 <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
                 <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
@@ -61,13 +62,15 @@ export default {
     </div>
 
     <!-- sezione visuale filtro ricerca -->
-    <section id="search-section">
-        <div class="card-container">
-            <div class="card" v-for="restaurant in restaurants" :key="restaurant.id">
-                <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <p class="card-text">{{ restaurant.address }}</p>
+    <section class="container-sm mt-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col mb-4" v-for="(restaurant, index) in restaurants" :key="restaurant.id">
+                <div class="card">
+                    <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <p class="card-text">{{ restaurant.address }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,20 +78,14 @@ export default {
 </template>
 
 <style lang='scss' scoped>
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.card {
 
-    .card {
-        width: 300px;
-        margin-bottom: 20px;
+    margin-bottom: 20px;
 
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
     }
 }
 </style>
