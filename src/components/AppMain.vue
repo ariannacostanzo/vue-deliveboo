@@ -8,7 +8,7 @@ export default {
     <main class="">
 
         <!--restaurant types buttons-->
-        <div class="container-sm">
+        <!-- <div class="container-sm">
             <div class="types-section row py-5">
                 <div>
                     <h2 class="text-center mb-0">Categorie più richieste</h2>
@@ -27,7 +27,7 @@ export default {
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!--info boxes-->
         <div class="bg-secondary-subtle">
