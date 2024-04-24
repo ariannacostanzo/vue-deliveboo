@@ -127,23 +127,4 @@ export default {
         list-style: none;
     }
 }
-
-
-// # section search-section # //
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-    .card {
-        width: 300px;
-        margin-bottom: 20px;
-
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-    }
-}
 </style>
