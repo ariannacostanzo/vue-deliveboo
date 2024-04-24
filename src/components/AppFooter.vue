@@ -5,6 +5,7 @@ export default {
 </script>
 
 <template>
+
     <footer class="py-4">
         <div class="container">
             <div class="row justify-content-between align-items-center">
