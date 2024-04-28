@@ -23,8 +23,7 @@ export default {
                     console.error(error);
                 }
             } else {
-                // Se la barra di ricerca è vuota, imposta la lista dei ristoranti vuota
-                this.restaurants = [];
+                this.fetchRestaurants(); // Aggiorna la lista completa se la barra di ricerca è vuota
             }
         },
         async fetchTypes() {
@@ -46,6 +45,14 @@ export default {
         isFilterSelected(filter) {
             return this.selectedFilters.includes(filter.toLowerCase());
         },
+        async fetchRestaurants() {
+            try {
+                const response = await axios.get('http://localhost:8000/api/restaurants');
+                this.restaurants = response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        },
     },
     computed: {
         filteredRestaurants() {
@@ -60,6 +67,7 @@ export default {
     },
     created() {
         this.fetchTypes();
+        this.fetchRestaurants(); // Carica tutti i ristoranti all'avvio
     }
 }
 </script>
