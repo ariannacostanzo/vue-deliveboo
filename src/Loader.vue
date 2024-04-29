@@ -27,7 +27,7 @@ export default {
     },
     components: { AppHeader, Jumbotron, AppSearch, AppMain, AppFooter },
 
-    created() {
+    mounted() {
 
         setTimeout(() => {
             this.isLoading = false;
