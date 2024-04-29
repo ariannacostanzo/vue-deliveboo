@@ -88,7 +88,7 @@ export default {
 
                     <!--new-->
                     <article class="my_card">
-                        <div class="temporary_text">
+                        <div>
                             <img src="../assets/friends.jpeg" class="cm-card-img" alt="friends-eating">
                         </div>
                         <div class="my_card_content">

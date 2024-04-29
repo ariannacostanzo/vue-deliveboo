@@ -43,8 +43,6 @@
 }
 
 
-
-
 //card
 
 .cm-card {
@@ -70,11 +68,6 @@
   width: 100%;
 }
 
-.temporary_text {
-  font-weight: bold;
-  font-size: 24px;
-  color: #f8f8f8;
-}
 
 .my_card_title {
   font-weight: bold;
@@ -82,6 +75,7 @@
   font-family: $roboto-condensed;
   line-height: 15px;
   font-size: 20px;
+  color: #212529;
 
 }
 
@@ -292,34 +286,22 @@ img {
 }
 }
 
+.card {
+  margin-top: 20px;
+  border: none;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
 
+.card-title {
+  color: $princeton-orange;
+  font-family: $roboto-condensed;
+}
 
-
-
-
-
-
-
-
-
-
-
-// .card {
-//   margin-top: 20px;
-//   border: none;
-//   background-color: #f9f9f9;
-//   border-radius: 10px;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-// }
-
-// .card-title {
-//   color: $princeton-orange;
-//   font-family: $roboto-condensed;
-// }
-
-// .card-text {
-//   color: $black-color;
-// }
+.card-text {
+  color: $black-color;
+}
 
 
 
