@@ -23,6 +23,8 @@ footer {
 .social-icons li i,
 .store-icons li i {
   font-size: 2rem;
+  cursor: pointer;
+  color: #212529;
 }
 
 .footer-links ul {
@@ -42,6 +44,6 @@ footer {
 }
 
 .copyright {
-  font-size: 14px;
+  font-size: 12px;
   text-align: right;
 }
