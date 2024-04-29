@@ -2,8 +2,13 @@
 
 header {
   background-color: $princeton-orange;
-  padding: 0rem 3rem;
-  box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  padding: .2rem 3rem;
+  position: sticky;
+  box-shadow: 0 0 2px 0 black;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 5;
 }
 
 .navbar {
