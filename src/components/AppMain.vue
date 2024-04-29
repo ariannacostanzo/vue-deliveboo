@@ -11,7 +11,7 @@ export default {
     <main class="">
 
         <!--restaurant types buttons-->
-        <div class="container-sm">
+        <!-- <div class="container-sm">
             <div class="types-section row py-5">
                 <div>
                     <h2 class="text-center mb-0">Categorie più richieste</h2>
@@ -29,7 +29,7 @@ export default {
                     <a class="button text-decoration-none">Poké </a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!--SVG UPPER WAVE-->
         <div class="background-wave">
