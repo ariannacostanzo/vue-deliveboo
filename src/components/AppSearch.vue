@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export default {
-    name: 'Jumbotron',
+    name: 'AppSearch',
     data() {
         return {
             searchTerm: '',
@@ -53,6 +53,13 @@ export default {
                 console.error(error);
             }
         },
+        // animazione titolo
+        animateGrower() {
+            this.$refs.grower.classList.remove('animate');
+            void this.$refs.grower.offsetWidth;
+            this.$refs.grower.classList.add('animate');
+        }
+
     },
     computed: {
         filteredRestaurants() {
@@ -73,54 +80,179 @@ export default {
 </script>
 
 <template>
-    <div class="search-bar">
-        <div class="card container-sm">
-            <div class="card-body">
-                <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
-                <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
-                <div class="input-group justify-content-center">
-                    <input class="form-control" placeholder="cerca il tuo ristorante" v-model="searchTerm"
-                        @input="searchRestaurants">
-                    <button class="btn btn-primary" @click="searchRestaurants"><i
-                            class="fa-solid fas fa-search"></i></button>
-                </div>
+    <div class="">
+        <!-- Search Bar -->
+        <div class="container d-flex justify-content-center flex-column text-center mt-5">
+            <h1 class="title-jumbotron grower animated" ref="grower">Il bello è prenderci gusto</h1>
+            <h5>Ordina online dai tuoi ristoranti preferiti</h5>
+            <div class="search-bar search-bar-deliveboo">
+                <input type="text" class="search-input" placeholder="Cerca il tuo ristorante" v-model="searchTerm"
+                    @input="searchRestaurants">
+                <button class="search-button" @click="searchRestaurants"><i class="fas fa-search"></i></button>
             </div>
         </div>
 
-        <!-- Box dei bottoni per il filtro -->
-        <div class="card container-sm mt-3">
-            <div class="card-body d-flex flex-wrap">
-                <button v-for="type in types" :key="type.id" @click="toggleFilter(type.label)"
-                    :class="{ 'btn btn-primary': isFilterSelected(type.label), 'btn btn-outline-primary': !isFilterSelected(type.label) }">{{
-                        type.label }}</button>
-            </div>
+        <!-- Filter Buttons -->
+        <div class="filter-container">
+            <button v-for="type in types" :key="type.id" @click="toggleFilter(type.label)"
+                :class="{ 'filter-button active': isFilterSelected(type.label), 'filter-button': !isFilterSelected(type.label) }">
+                <i :class="['fas', type.icon]"></i> {{ type.label }}
+                <span v-if="isFilterSelected(type.label)" @click.stop="toggleFilter(type.label)"
+                    class="close-filter">&times;</span>
+            </button>
         </div>
+
+        <!-- Restaurant Cards -->
+        <section class="restaurant-container">
+            <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
+                <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
+                <div class="card-details">
+                    <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
+                    <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{ restaurant.address }}</p>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <!-- sezione visuale filtro ricerca -->
-    <section class="container-sm mt-5">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-            <div class="col mb-4" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
-                <div class="card">
-                    <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <p class="card-text">{{ restaurant.address }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </template>
 
 <style lang='scss' scoped>
-.card {
-    margin-bottom: 20px;
+// Search container
+.grower.animated {
+    animation-name: grow;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
 
-    .card-img-top {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
+@keyframes grow {
+    0% {
+        transform: scaleX(1);
     }
+
+    25% {}
+
+    50% {}
+
+    75% {
+
+        transform: scaleX(1.8);
+    }
+
+    100% {}
+}
+
+.grower {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Search Bar Styles 
+.search-bar-deliveboo {
+    display: flex;
+    align-items: center;
+    border-radius: 40px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.search-button {
+    background-color: #f48c06;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 0 40px 40px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Effetto Hover sul pulsante di ricerca */
+.search-button:hover {
+    background-color: #e04a4e;
+}
+
+
+
+
+
+// Filter Button Styles
+.filter-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-button {
+    margin: 0 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.close-filter {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+// Restaurant Card Styles 
+.restaurant-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.restaurant-card {
+    width: 250px;
+    margin: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-details {
+    padding: 15px;
+}
+
+.restaurant-name {
+    margin: 0;
+    font-size: 20px;
+}
+
+.restaurant-address {
+    margin-top: 5px;
+    font-size: 16px;
 }
 </style>

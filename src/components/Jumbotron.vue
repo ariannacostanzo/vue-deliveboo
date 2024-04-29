@@ -45,30 +45,7 @@ export default {
 
 <template>
     <section class="jumbotron">
-        <div class="search-bar">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
-                    <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
-                    <div class="input-group justify-content-center">
-                        <!-- <span class="input-group-text text-black" id="basic-addon1"><i
-                                class="fa-solid fas fa-search"></i></span> -->
-                        <input class="form-control" placeholder="cerca il tuo ristorante" v-model="searchTerm"
-                            @input="searchRestaurants">
-                        <button class="btn btn-primary" @click="searchRestaurants"><i
-                                class="fa-solid fas fa-search"></i></button>
-                    </div>
-                    <!-- <div class="dropdown mt-5 text-center" v-if="searchTerm && restaurants.length > 0">
-                        <h2>Risultati della ricerca:</h2>
-                        <ul>
-                            <li class="" v-for="restaurant in restaurants" :key="restaurant.id">
-                                {{ restaurant.name }}
-                            </li>
-                        </ul>
-                    </div> -->
-                </div>
-            </div>
-        </div>
+
     </section>
 
     <!-- sezione visuale filtro ricerca -->
@@ -91,7 +68,7 @@ export default {
     background-image: url("../assets/jumbotron-image.jpg");
     background-size: cover;
     background-position: center;
-    height: 600px;
+    height: 300px;
     opacity: 0.9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
