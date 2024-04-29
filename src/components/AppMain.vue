@@ -49,45 +49,59 @@ export default {
 
                 <div class="d-flex justify-content-center row gap-5 mt-4">
                     <!--quality-->
-                    <div class="card pt-3" style="width: 18rem;">
-                        <img src="../assets/restaurant-quality.png" class="card-img-top" alt="food-quality">
-                        <div class="card-body">
-                            <h5 class="card-title">Qualità</h5>
-                            <p class="card-text">Abbiamo stretto collaborazioni solo con i migliori ristoranti della
+
+                    <article class="my_card">
+                        <div class="temporary_text">
+                            <img src="../assets/restaurant-quality.png" class="cm-card-img" alt="food-quality">
+                        </div>
+                        <div class="my_card_content">
+                            <span class="my_card_title">Qualità</span>
+                            <p class="my_card_description">Abbiamo stretto collaborazioni solo con i migliori ristoranti
+                                della
                                 zona,
                                 garantendo ai nostri utenti un'esperienza gastronomica senza pari. I nostri partner non
                                 sono
                                 solo locali rinomati,
                                 ma sono anche certificati per la loro dedizione alla qualità e all'eccellenza.</p>
+
                         </div>
-                    </div>
+                    </article>
 
                     <!--speed-->
-                    <div class="card pt-3" style="width: 18rem;">
-                        <img src="../assets/rider.jpeg" class="card-img-top img-fluid" alt="rider-image">
-                        <div class="card-body">
-                            <h5 class="card-title">Velocità</h5>
-                            <p class="card-text">Con noi, la tua fame non aspetta! Grazie alla nostra rapida e puntuale
-                                consegna,
-                                puoi gustare i tuoi piatti preferiti comodamente a casa tua,
-                                senza dover attendere. Nulla è più importante della soddisfazione del tuo appetito!</p>
+
+                    <article class="my_card">
+                        <div class="temporary_text">
+                            <img src="../assets/rider.jpeg" class="cm-card-img" alt="friends-eating">
                         </div>
-                    </div>
+                        <div class="my_card_content">
+                            <span class="my_card_title">Velocità</span>
+                            <p class="my_card_description">Con noi, non devi aspettare per soddisfare la tua fame! Grazie
+                                alla nostra consegna rapida e puntuale, puoi gustare i tuoi piatti preferiti comodamente
+                                a casa tua, senza alcuna attesa. Nulla è più importante della soddisfazione del tuo
+                                appetito!</p>
+
+                        </div>
+                    </article>
 
                     <!--new-->
-                    <div class="card pt-3" style="width: 18rem;">
-                        <img src="../assets/friends.jpeg" class="card-img-top img-fluid" alt="friends-eating">
-                        <div class="card-body">
-                            <h5 class="card-title">Novità</h5>
-                            <p class="card-text">Lasciati trasportare in un viaggio senza confini: dalla cucina di casa
+                    <article class="my_card">
+                        <div class="temporary_text">
+                            <img src="../assets/friends.jpeg" class="cm-card-img" alt="friends-eating">
+                        </div>
+                        <div class="my_card_content">
+                            <span class="my_card_title">Novità</span>
+                            <p class="my_card_description">Lasciati trasportare in un viaggio senza confini: dalla cucina
+                                di casa
                                 ai
                                 sapori del mondo!
                                 Che tu stia sperimentando le delizie esotiche o riscoprendo i gusti familiari,
                                 ogni morso è un'esperienza unica, un incontro tra il nuovo e il familiare, tra il
                                 presente e il
                                 passato.</p>
+
                         </div>
-                    </div>
+                    </article>
+
                 </div>
             </div>
         </div>
@@ -112,12 +126,12 @@ export default {
                     <h2 class="text-center">Scarica la nostra app!</h2>
                     <div class="buttons-container">
                         <!-- app store -->
-                        <a href="#" class="btn btn-lg btn-block mb-3 button">
+                        <a href="#" class="btn btn-lg btn-block mb-3 cm-button">
                             <i class="fab fa-app-store"></i>
                             App Store
                         </a>
                         <!-- google play -->
-                        <a href="#" class="btn btn-lg btn-block mb-3 button">
+                        <a href="#" class="btn btn-lg btn-block mb-3 cm-button">
                             <i class="fab fa-google-play"></i>
                             Google Play
                         </a>
@@ -145,7 +159,7 @@ export default {
             <h2 class="text-center pb-2">Diventa nostro partner</h2>
 
 
-            <div class="work-with-us container">
+            <div class="work-with-us container cm-card">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <img src="../assets/work.jpeg" class="img-fluid" alt="work-with-us">
@@ -159,7 +173,7 @@ export default {
                                 offrire ai clienti la comodità di gustare i tuoi piatti eccezionali direttamente a casa
                                 loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso!
                             </p>
-                            <button class="btn button">Diventa Partner</button>
+                            <button class="btn cm-button">Diventa Partner</button>
                         </div>
                     </div>
                 </div>
@@ -184,13 +198,13 @@ export default {
 
 .upper {
     position: absolute;
-    bottom: 0;
+    bottom: -7px;
     left: 0;
 }
 
 .lower {
     position: absolute;
-    top: 0;
+    top: -3px;
     left: 0;
     transform: rotate(180deg);
 }

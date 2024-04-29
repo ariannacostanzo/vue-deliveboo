@@ -44,7 +44,7 @@ export default {
             </div>
             <div class="row">
                 <div class="col text-center text-md-end">
-                    <p class="mb-0">© 2024 Deliveboo. Tutti i diritti riservati.</p>
+                    <p class="mb-0 copyright">© 2024 Deliveboo. Tutti i diritti riservati.</p>
                 </div>
             </div>
         </div>
