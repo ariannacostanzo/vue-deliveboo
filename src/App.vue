@@ -17,6 +17,7 @@ export default {
   <AppHeader />
   <Jumbotron />
   <AppSearch />
+  <RouterView />
   <AppMain />
   <AppFooter />
 

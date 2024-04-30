@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
     name: 'Jumbotron',
@@ -53,6 +54,9 @@ export default {
                 console.error(error);
             }
         },
+        restaurantDetail(restaurant) {
+            this.$router.push({ name: 'detail-restaurant', params: { id: restaurant.id } });
+        },
     },
     computed: {
         filteredRestaurants() {
@@ -105,7 +109,10 @@ export default {
                     <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <p class="card-text">{{ restaurant.address }}</p>
+                        <RouterLink class="btn btn-sm btn-primary"
+                            :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">Vedi</RouterLink>
+                        <p class="card-text">{{
+                            restaurant.address }}</p>
                     </div>
                 </div>
             </div>
