@@ -64,7 +64,9 @@ export default {
                 return this.restaurants;
             } else {
                 return this.restaurants.filter(restaurant =>
-                    restaurant.types.some(type => this.selectedFilters.includes(type.label.toLowerCase()))
+                    this.selectedFilters.every(filter =>
+                        restaurant.types.some(type => type.label.toLowerCase() === filter)
+                    )
                 );
             }
         }
@@ -128,7 +130,6 @@ export default {
 </template>
 
 <style lang='scss' scoped>
-
 a {
     text-decoration: none;
     color: #212529;
