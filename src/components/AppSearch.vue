@@ -24,7 +24,8 @@ export default {
                     console.error(error);
                 }
             } else {
-                this.fetchRestaurants(); // Aggiorna la lista completa se la barra di ricerca è vuota
+                // Aggiorna la lista completa se la barra di ricerca è vuota
+                this.fetchRestaurants();
             }
         },
         async fetchTypes() {
@@ -73,7 +74,9 @@ export default {
     },
     created() {
         this.fetchTypes();
-        this.fetchRestaurants(); // Carica tutti i ristoranti all'avvio
+
+        // Carica tutti i ristoranti all'avvio
+        this.fetchRestaurants();
     }
 }
 </script>
@@ -106,7 +109,6 @@ export default {
 
             <!-- Restaurant Cards -->
             <div class="container ">
-
                 <section class="restaurant-container">
                     <div class="row gap-3 justify-content-center cards-row">
 
@@ -120,6 +122,11 @@ export default {
                                 <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
                                 <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
                                     restaurant.address }}</p>
+                                <div class="pills-container">
+                                    <span class="pill" v-for="type in restaurant.types" :key="type.id">
+                                        {{ type.label }}
+                                    </span>
+                                </div>
                             </div>
                         </RouterLink>
                     </div>
@@ -288,5 +295,22 @@ a {
 .restaurant-address {
     margin-top: 5px;
     font-size: 16px;
+}
+
+// Stili delle pills
+.pills-container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pill {
+    background-color: #F48C06;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 5px;
+    font-size: 14px;
 }
 </style>
