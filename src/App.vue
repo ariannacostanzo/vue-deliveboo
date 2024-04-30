@@ -29,13 +29,12 @@ export default {
     <Loader :isLoading="isLoading" />
   </div>
 
-  <div>
-    <AppHeader />
-    <Jumbotron />
-    <AppSearch />
-    <AppMain />
-    <AppFooter />
-  </div>
+  <AppHeader />
+  <Jumbotron />
+  <AppSearch />
+  <RouterView />
+  <AppMain />
+  <AppFooter />
 
 </template>
 

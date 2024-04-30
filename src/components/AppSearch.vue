@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { RouterLink } from 'vue-router';
 
 export default {
     name: 'AppSearch',
@@ -53,13 +54,9 @@ export default {
                 console.error(error);
             }
         },
-        // animazione titolo
-        animateGrower() {
-            this.$refs.grower.classList.remove('animate');
-            void this.$refs.grower.offsetWidth;
-            this.$refs.grower.classList.add('animate');
-        }
-
+        restaurantDetail(restaurant) {
+            this.$router.push({ name: 'detail-restaurant', params: { id: restaurant.id } });
+        },
     },
     computed: {
         filteredRestaurants() {
@@ -125,6 +122,24 @@ export default {
             </div>
         </div>
     </div>
+
+    <!-- sezione visuale filtro ricerca -->
+    <section class="container-sm mt-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col mb-4" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
+                <div class="card">
+                    <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <RouterLink class="btn btn-sm btn-primary"
+                            :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">Vedi</RouterLink>
+                        <p class="card-text">{{
+                            restaurant.address }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <style lang='scss' scoped>
