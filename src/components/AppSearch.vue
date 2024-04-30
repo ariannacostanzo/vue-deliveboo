@@ -104,17 +104,21 @@ export default {
 
             <!-- Restaurant Cards -->
             <div class="container">
-                
+
                 <section class="restaurant-container">
                     <div class="row gap-3 justify-content-center">
 
-                        <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
+                        <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
+                            :key="restaurant.id">
                             <div class="restourant-image">
                                 <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
                             </div>
                             <div class="card-details content">
                                 <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
-                                <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{ restaurant.address }}</p>
+                                <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
+                                    restaurant.address }}</p>
+                                <RouterLink class="btn btn-sm btn-primary"
+                                    :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">Vedi</RouterLink>
                             </div>
                         </div>
                     </div>
@@ -122,28 +126,9 @@ export default {
             </div>
         </div>
     </div>
-
-    <!-- sezione visuale filtro ricerca -->
-    <section class="container-sm mt-5">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-            <div class="col mb-4" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
-                <div class="card">
-                    <img :src="restaurant.image" class="card-img-top" alt="Restaurant Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <RouterLink class="btn btn-sm btn-primary"
-                            :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">Vedi</RouterLink>
-                        <p class="card-text">{{
-                            restaurant.address }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </template>
 
 <style lang='scss' scoped>
-
 // Search Bar Styles 
 .search-bar-deliveboo {
     display: flex;
