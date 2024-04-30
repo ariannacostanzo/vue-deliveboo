@@ -5,33 +5,15 @@ export default {
         return {
 
         }
-    }
+    },
 }
 </script>
 
 <template>
+    
     <main class="">
 
-        <!--restaurant types buttons-->
-        <!-- <div class="container-sm">
-            <div class="types-section row py-5">
-                <div>
-                    <h2 class="text-center mb-0">Categorie più richieste</h2>
-                </div>
-                <div class="buttons-container">
-                    <a class="button text-decoration-none">Pizzeria</a>
-                    <a class="button text-decoration-none">Griglieria</a>
-                    <a class="button text-decoration-none">Hamburger </a>
-                    <a class="button text-decoration-none">Sushi</a>
-                    <a class="button text-decoration-none">Cinese</a>
-                    <a class="button text-decoration-none">Italiano</a>
-                    <a class="button text-decoration-none">Fast food </a>
-                    <a class="button text-decoration-none">Kebab </a>
-                    <a class="button text-decoration-none">Indiano </a>
-                    <a class="button text-decoration-none">Poké </a>
-                </div>
-            </div>
-        </div> -->
+
 
         <!--SVG UPPER WAVE-->
         <div class="background-wave">

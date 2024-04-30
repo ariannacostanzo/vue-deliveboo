@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { RouterLink } from 'vue-router';
+import Jumbotron from './Jumbotron.vue';
 
 export default {
     name: 'AppSearch',
@@ -12,6 +13,7 @@ export default {
             selectedFilters: []
         };
     },
+    components: {Jumbotron},
     methods: {
         async searchRestaurants() {
             if (this.searchTerm.trim() !== '') {
@@ -77,6 +79,7 @@ export default {
 </script>
 
 <template>
+    <Jumbotron />
     <div class="">
         <!-- Search Bar -->
         <div class="container d-flex justify-content-center flex-column text-center mt-5">
@@ -97,7 +100,7 @@ export default {
                     :class="{ 'filter-button active': isFilterSelected(type.label), 'filter-button': !isFilterSelected(type.label) }">
                     <i :class="['fas', type.icon]"></i> {{ type.label }}
                     <span v-if="isFilterSelected(type.label)" @click.stop="toggleFilter(type.label)"
-                        class="close-filter">&times;</span>
+                        class="close-filter"><i class="fa-solid fa-x"></i></span>
                 </button>
             </div>
 
@@ -209,11 +212,11 @@ a {
     cursor: pointer;
 
     position: absolute;
-    top: 50%;
+    top: 55%;
     right: 0px;
     transform: translateY(-2rem);
 
-    font-size: 1.5rem;
+    font-size: 14px;
     color: red;
 
     transition: visibility 0.3s ease;
