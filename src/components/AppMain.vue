@@ -130,12 +130,13 @@ export default {
                     <h2 class="text-center">Scarica la nostra app!</h2>
                     <div class="buttons-container">
                         <!-- app store -->
-                        <a href="#" class="btn btn-lg btn-block mb-3 cm-button">
+                        <a href="https://www.apple.com/it/app-store/" target=”_blank”
+                            class="btn btn-lg btn-block mb-3 cm-button">
                             <i class="fab fa-app-store"></i>
                             App Store
                         </a>
                         <!-- google play -->
-                        <a href="#" class="btn btn-lg btn-block mb-3 cm-button">
+                        <a href="https://play.google.com/" target=”_blank” class="btn btn-lg btn-block mb-3 cm-button">
                             <i class="fab fa-google-play"></i>
                             Google Play
                         </a>
@@ -174,8 +175,8 @@ export default {
                             garantendo una visibilità senza precedenti per il tuo ristorante. Unisciti a noi per
                             offrire ai clienti la comodità di gustare i tuoi piatti eccezionali direttamente a casa
                             loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso!</p>
-                        <a  class="work-card-hover__link">
-                            <span >Diventa partner</span>
+                        <a class="work-card-hover__link">
+                            <span>Diventa partner</span>
                             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
