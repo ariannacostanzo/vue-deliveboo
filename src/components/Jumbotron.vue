@@ -3,72 +3,49 @@ import axios from 'axios';
 
 export default {
     name: 'Jumbotron',
-    data() {
-        return {
-            searchTerm: '',
-            restaurants: [],
-            types: []
-        };
-    },
-    methods: {
-        async searchRestaurants() {
-            if (this.searchTerm.trim() !== '') {
-                try {
-                    const response = await axios.get('http://localhost:8000/api/restaurants');
-                    this.restaurants = response.data.filter(restaurant =>
-                        restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-                        restaurant.types.some(type => type.label.toLowerCase().includes(this.searchTerm.toLowerCase()))
-                    );
-                } catch (error) {
-                    console.error(error);
-                }
-            } else {
-                // Se la barra di ricerca è vuota, imposta vuoto
-                this.restaurants = [];
-            }
-        },
-        async fetchTypes() {
-            try {
-                const response = await axios.get('http://localhost:8000/api/types');
-                this.types = response.data;
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    },
-    created() {
-        this.fetchTypes();
-    }
+    // data() {
+    //     return {
+    //         searchTerm: '',
+    //         restaurants: [],
+    //         types: []
+    //     };
+    // },
+    // methods: {
+    //     async searchRestaurants() {
+    //         if (this.searchTerm.trim() !== '') {
+    //             try {
+    //                 const response = await axios.get('http://localhost:8000/api/restaurants');
+    //                 this.restaurants = response.data.filter(restaurant =>
+    //                     restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+    //                     restaurant.types.some(type => type.label.toLowerCase().includes(this.searchTerm.toLowerCase()))
+    //                 );
+    //             } catch (error) {
+    //                 console.error(error);
+    //             }
+    //         } else {
+    //             // Se la barra di ricerca è vuota, imposta vuoto
+    //             this.restaurants = [];
+    //         }
+    //     },
+    //     async fetchTypes() {
+    //         try {
+    //             const response = await axios.get('http://localhost:8000/api/types');
+    //             this.types = response.data;
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    // },
+    // created() {
+    //     this.fetchTypes();
+    // }
 }
 </script>
 
 
 <template>
     <section class="jumbotron">
-        <div class="search-bar">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="title-jumbotron text-center pt-5">Il bello è prenderci gusto</h1>
-                    <p class="text-center">Ordina online dai tuoi ristoranti preferiti</p>
-                    <div class="input-group justify-content-center">
-                        <!-- <span class="input-group-text text-black" id="basic-addon1"><i
-                                class="fa-solid fas fa-search"></i></span> -->
-                        <input class="form-control" placeholder="cerca il tuo ristorante" v-model="searchTerm"
-                            @input="searchRestaurants">
-                        <button class="btn btn-primary" @click="searchRestaurants"><i
-                                class="fa-solid fas fa-search"></i></button>
-                    </div>
-                    <!-- <div class="dropdown mt-5 text-center" v-if="searchTerm && restaurants.length > 0">
-                        <h2>Risultati della ricerca:</h2>
-                        <ul>
-                            <li class="" v-for="restaurant in restaurants" :key="restaurant.id">
-                                {{ restaurant.name }}
-                            </li>
-                        </ul>
-                    </div> -->
-                </div>
-            </div>
-        </div>
+
     </section>
 
     <!-- sezione visuale filtro ricerca -->
@@ -91,40 +68,40 @@ export default {
     background-image: url("../assets/jumbotron-image.jpg");
     background-size: cover;
     background-position: center;
-    height: 600px;
+    height: 300px;
     opacity: 0.9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
 
-    // SearchBar
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // // SearchBar
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
 
-    .form-control {
-        max-width: 500px;
-        height: 60px;
+    // .form-control {
+    //     max-width: 500px;
+    //     height: 60px;
 
-    }
+    // }
 
-    .search-bar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    // .search-bar {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    // }
 
-    .card-body {
-        min-width: 800px;
-        min-height: 300px;
+    // .card-body {
+    //     min-width: 800px;
+    //     min-height: 300px;
 
-    }
+    // }
 
-    .title-jumbotron {
-        color: #F48C08;
-    }
+    // .title-jumbotron {
+    //     color: #F48C08;
+    // }
 
-    li {
-        list-style: none;
-    }
+    // li {
+    //     list-style: none;
+    // }
 }
 </style>
