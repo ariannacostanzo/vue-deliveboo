@@ -106,54 +106,28 @@ export default {
 
 
             <!-- Restaurant Cards -->
-            <section class="restaurant-container">
-                <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
-                    <div class="restourant-image">
-                        <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
+            <div class="container">
+                
+                <section class="restaurant-container">
+                    <div class="row gap-3 justify-content-center">
+
+                        <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants" :key="restaurant.id">
+                            <div class="restourant-image">
+                                <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
+                            </div>
+                            <div class="card-details content">
+                                <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
+                                <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{ restaurant.address }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-details content">
-                        <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
-                        <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{ restaurant.address }}</p>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang='scss' scoped>
-// Search container
-.grower.animated:hover {
-    animation-name: grow;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes grow {
-    0% {
-        transform: scaleX(1);
-    }
-
-    25% {}
-
-    50% {}
-
-    75% {
-
-        transform: scaleX(1.8);
-    }
-
-    100% {}
-}
-
-.grower {
-    width: 100%;
-    height: 50px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 // Search Bar Styles 
 .search-bar-deliveboo {
@@ -176,7 +150,7 @@ export default {
 }
 
 .search-button {
-    background-color: #f48c06;
+    background-color: #faa307;
     border: none;
     color: white;
     padding: 10px;
@@ -187,7 +161,7 @@ export default {
 
 // Effetto Hover sul pulsante di ricerca
 .search-button:hover {
-    background-color: #e04a4e;
+    background-color: #f48c06;
 }
 
 // Filter Button Styles
