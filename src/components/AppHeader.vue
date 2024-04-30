@@ -12,12 +12,12 @@ export default {
             <RouterLink class="navbar-brand" :to="{name: 'home-page'}">
                 <img src="../assets/logo-deliveboo.png" alt="LOGO">
             </RouterLink>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
+            <RouterLink class="cart-icon" :to="{ name: 'cart' }">
+                    <i class="fa-solid fa-cart-shopping"></i>
 
-                <!-- implementare counter -->
-                <span class="cart-counter">0</span>
-            </div>
+                    <!-- implementare counter -->
+                    <span class="cart-counter">0</span>
+            </RouterLink>
         </nav>
     </header>
 </template>

@@ -16,7 +16,7 @@ export default {
 
 
   <AppHeader />
-  <Jumbotron />
+  <!-- <Jumbotron /> -->
   <!-- <HomePage /> -->
   <RouterView />
   <AppFooter />
