@@ -1,4 +1,6 @@
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
     name: 'AppFooter'
 }
@@ -30,10 +32,14 @@ export default {
                 <div class="col-md-0 mb-3 mb-md-0">
                     <div class="footer-links">
                         <ul class="list-unstyled mb-0 d-flex justify-content-center justify-content-md-center pt-3">
-                            <li><a  class="text-decoration-none text-black">FAQ</a></li>
-                            <li><a  class="text-decoration-none text-black">Supporto</a></li>
-                            <li><a  class="text-decoration-none text-black">Contatti</a></li>
-                            <li><a  class="text-decoration-none text-black">Termini e condizioni</a></li>
+                            <li><a class="text-decoration-none text-black">FAQ</a></li>
+                            <li><a class="text-decoration-none text-black">Supporto</a></li>
+                            <li>
+                                <RouterLink :to="{ name: 'contact-us' }" class=" text-decoration-none text-black">
+                                    Contatti
+                                </RouterLink>
+                            </li>
+                            <li><a class="text-decoration-none text-black">Termini e condizioni</a></li>
                         </ul>
                     </div>
                 </div>
