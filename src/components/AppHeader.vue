@@ -1,4 +1,6 @@
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
     name: 'AppHeader'
 }
@@ -7,9 +9,9 @@ export default {
 <template>
     <header>
         <nav class="navbar container-sm">
-            <a class="navbar-brand" href="#">
+            <RouterLink class="navbar-brand" :to="{name: 'home-page'}">
                 <img src="../assets/logo-deliveboo.png" alt="LOGO">
-            </a>
+            </RouterLink>
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
 

@@ -103,12 +103,13 @@ export default {
 
 
             <!-- Restaurant Cards -->
-            <div class="container">
+            <div class="container ">
 
                 <section class="restaurant-container">
-                    <div class="row gap-3 justify-content-center">
+                    <div class="row gap-3 justify-content-center cards-row">
 
-                        <div class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
+                        <RouterLink :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
+                            class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
                             :key="restaurant.id">
                             <div class="restourant-image">
                                 <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
@@ -117,10 +118,8 @@ export default {
                                 <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
                                 <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
                                     restaurant.address }}</p>
-                                <RouterLink class="btn btn-sm btn-primary"
-                                    :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }">Vedi</RouterLink>
                             </div>
-                        </div>
+                        </RouterLink>
                     </div>
                 </section>
             </div>
@@ -129,6 +128,12 @@ export default {
 </template>
 
 <style lang='scss' scoped>
+
+a {
+    text-decoration: none;
+    color: #212529;
+}
+
 // Search Bar Styles 
 .search-bar-deliveboo {
     display: flex;
@@ -249,6 +254,7 @@ export default {
     border-radius: 15px;
 
     position: relative;
+    z-index: 2;
 }
 
 .restaurant-card:hover {

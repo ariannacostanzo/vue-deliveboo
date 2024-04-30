@@ -213,6 +213,7 @@ export default {
     position: absolute;
     bottom: -7px;
     left: 0;
+    z-index: 0;
 }
 
 .lower {
