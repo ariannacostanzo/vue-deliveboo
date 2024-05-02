@@ -1,4 +1,5 @@
 <script>
+import { store } from '../../store.js';
 import axios from 'axios';
 import Loader from '../Loader.vue';
 const defaultEndpoint = 'http://localhost:8000/api/restaurants/';
@@ -9,6 +10,7 @@ export default {
     data: () => ({
         restaurants: null,
         dishes: null,
+        store
     }),
     methods: {
         getRestaurant() {
@@ -17,7 +19,17 @@ export default {
                     this.restaurants = res.data
                 })
                 .catch(err => { console.error(err.message) })
-        }
+        },
+        addToCart(dish) {
+            const { id, name, price } = dish;
+            const existingItem = this.store.cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                this.store.cart.push({ id, name, price, quantity: 1 });
+            }
+            console.log(store.cart);
+        } 
     },
     created() {
         this.getRestaurant();
@@ -26,7 +38,6 @@ export default {
 </script>
 
 <template>
-
     <h2 class="text-center mt-3">{{ restaurants.name }}</h2>
     <address class="text-center"> {{ restaurants.address }}</address>
 
@@ -44,7 +55,7 @@ export default {
                     <h5 class="card-title">{{ dish.name }}</h5>
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="card-text"> {{ dish.price }}€</p>
-                        <button class="btn btn-sm btn-primary">+</button>
+                        <button class="btn btn-sm btn-primary" @click="addToCart(dish)">+</button>
                     </div>
                 </div>
             </div>
