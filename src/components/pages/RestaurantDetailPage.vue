@@ -10,7 +10,11 @@ export default {
     data: () => ({
         restaurants: null,
         dishes: null,
-        store
+        store,
+        isModalVisible: false,
+        currentDishQuantity: 1,
+        currentDish: null
+
     }),
     methods: {
         getRestaurant() {
@@ -24,12 +28,35 @@ export default {
             const { id, name, price } = dish;
             const existingItem = this.store.cart.find(item => item.id === id);
             if (existingItem) {
-                existingItem.quantity++;
+                existingItem.quantity += this.currentDishQuantity;
             } else {
-                this.store.cart.push({ id, name, price, quantity: 1 });
+                this.store.cart.push({ id, name, price, quantity: this.currentDishQuantity });
             }
-            console.log(store.cart);
-        } 
+            this.closeModal();
+        },
+        populateModal(dish) {
+            this.isModalVisible = true
+
+            this.currentDish = dish;
+        },
+        closeModal() {
+            this.isModalVisible = false;
+
+            this.currentDish = null;
+            this.currentDishQuantity = 1;
+
+        },
+        changeQuantity(mode) {
+            if (mode === 'less') {
+                if (this.currentDishQuantity === 1) {
+                    return
+                } else {
+                    this.currentDishQuantity--;
+                }
+            } else {
+                this.currentDishQuantity++;
+            }
+        }
     },
     created() {
         this.getRestaurant();
@@ -46,7 +73,8 @@ export default {
     <hr>
     <h4 class="text-center mb-5">Scegli cosa ordinare</h4>
     <div class="row cards-container">
-        <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id" class="col-2">
+        <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id" class="col-2 dish-card"
+            @click="populateModal(dish)">
             <div class="my-card">
                 <div class="card-image">
                     <img v-if="dish.image" :src="dish.image" :alt="dish.name">
@@ -55,8 +83,33 @@ export default {
                     <h5 class="card-title">{{ dish.name }}</h5>
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="card-text"> {{ dish.price }}€</p>
-                        <button class="btn btn-sm btn-primary" @click="addToCart(dish)">+</button>
+                        <span class="btn btn-sm btn-primary">+</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modale  -->
+        <div v-if="isModalVisible" class="dish-modal-container">
+            <div class="dish-modal">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5>{{ currentDish.name }}</h5>
+                    <span @click="closeModal" class="close-btn"><i class="fa-solid fa-x"></i></span>
+                </div>
+                <p class="ingredients">{{ currentDish.ingredients }}</p>
+                <p>{{currentDish.price}} €</p>
+                <div class="d-flex align-items-center justify-content-center gap-5">
+                    <span class="dish-option">
+                        <i class="fa-solid fa-minus" @click="changeQuantity('less')"></i>
+                    </span>
+                    <span>{{ currentDishQuantity }}</span>
+                    <span class="dish-option">
+                        <i class="fa-solid fa-plus" @click="changeQuantity('more')"></i>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{ currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
+                        €</button>
                 </div>
             </div>
         </div>
@@ -77,6 +130,54 @@ export default {
     width: 1600px;
 }
 
+.dish-modal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+.dish-modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 20px;
+    width: 80%;
+    padding: 2rem;
+
+    .ingredients {
+        color: grey;
+        font-size: 14px;
+    }
+    .dish-option {
+        padding: 10px;
+        background-color: #f48d06ad;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+    }
+
+    .close-btn {
+        cursor: pointer;
+        background-color: lightgrey;
+        padding: 5px 10px;
+        border-radius: 50%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .dish-modal {
+        width: 35%;
+    }
+}
 
 .my-card {
     // width: calc(15% - 20px);

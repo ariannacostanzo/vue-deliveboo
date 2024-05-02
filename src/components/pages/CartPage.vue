@@ -1,79 +1,83 @@
 <script>
 import Jumbotron from '../Jumbotron.vue';
+import {store} from '../../store.js'
   export default {
     name: 'CartPage',
-    components: {Jumbotron}
+    components: {Jumbotron},
+    data() {
+        return {
+            store,
+        }
+    },
+    computed: {
+        getTotalPrice() {
+            let totalPrice = 0;
+            store.cart.forEach(dish => {
+                totalPrice += parseFloat(dish.price) * dish.quantity;
+            })
+            store.totalPrice = totalPrice.toFixed(2);
+            return store.totalPrice
+        },
+    },
+    methods: {
+        changeQuantity(mode, dish_id) {
+            const dish = this.store.cart.find(item => item.id === dish_id);
+            
+            if(mode === 'less'){
+                if(dish.quantity === 1) {
+                    store.cart = store.cart.filter(dish => dish.id !== dish_id)
+                } else {
+                    dish.quantity--;
+                }
+            } else {
+                dish.quantity++;
+            }
+        }
+    }
   }
 </script>
 
 <template>
-    <Jumbotron/>
+    <Jumbotron />
     <div class="container my-5 d-md-flex justify-content-between gap-5">
         <div class="left-content">
 
             <!-- riepilogo piatti -->
             <section id="dishes">
-                <h2>Il tuo ordine</h2>
-                <p>x prodotto da <strong>Nome Ristorante</strong></p>
+                <div v-if="store.cart.length === 0">
+                    <h2>Nessun ordine</h2>
+                </div>
+                <div v-else>
+                    <h2>Il tuo ordine</h2>
+                    <p>{{ store.totalQuantity }} <span v-if="store.totalQuantity === 1">prodotto</span>
+                        <span v-else>prodotti</span>
+                        da <strong>Nome Ristorante</strong>
+                    </p>
+                </div>
 
                 <!-- list item  -->
-                <div class="dishes-list-item d-lg-flex gap-3 mb-3">
+                <div v-for="dish in store.cart" class="dishes-list-item d-lg-flex gap-3 mb-3">
                     <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
-                        <span class="dish-option"><i class="fa-solid fa-minus"></i></span>
-                        <span class="d-none d-lg-inline">1</span>
-                        <span class="dish-option"><i class="fa-solid fa-plus"></i></span>
+                        <span class="dish-option" @click="changeQuantity('less', dish.id)"><i
+                                class="fa-solid fa-minus"></i></span>
+                        <span class="d-none d-lg-inline">{{ dish.quantity }}</span>
+                        <span class="dish-option" @click="changeQuantity('more', dish.id)"><i
+                                class="fa-solid fa-plus"></i></span>
                     </div>
                     <div class="d-flex  justify-content-between w-100">
-                        <span class="dish-info mb-2"><strong class="d-lg-none">1x</strong> nome Piatto </span>
-                        <span class="dish-price">6,40€</span>
-                    </div>
-                </div>
-                <div class="dishes-list-item d-lg-flex gap-3 mb-3">
-                    <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
-                        <span class="dish-option"><i class="fa-solid fa-minus"></i></span>
-                        <span class="d-none d-lg-inline">1</span>
-                        <span class="dish-option"><i class="fa-solid fa-plus"></i></span>
-                    </div>
-                    <div class="d-flex  justify-content-between w-100">
-                        <span class="dish-info mb-2"><strong class="d-lg-none">1x</strong> nome Piatto </span>
-                        <span class="dish-price">6,40€</span>
-                    </div>
-                </div>
-                <div class="dishes-list-item d-lg-flex gap-3 mb-3">
-                    <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
-                        <span class="dish-option"><i class="fa-solid fa-minus"></i></span>
-                        <span class="d-none d-lg-inline">1</span>
-                        <span class="dish-option"><i class="fa-solid fa-plus"></i></span>
-                    </div>
-                    <div class="d-flex  justify-content-between w-100">
-                        <span class="dish-info mb-2"><strong class="d-lg-none">1x</strong> nome Piatto </span>
-                        <span class="dish-price">6,40€</span>
-                    </div>
-                </div>
-                <div class="dishes-list-item d-lg-flex gap-3 mb-3">
-                    <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
-                        <span class="dish-option"><i class="fa-solid fa-minus"></i></span>
-                        <span class="d-none d-lg-inline">1</span>
-                        <span class="dish-option"><i class="fa-solid fa-plus"></i></span>
-                    </div>
-                    <div class="d-flex  justify-content-between w-100">
-                        <span class="dish-info mb-2"><strong class="d-lg-none">1x</strong> nome Piatto </span>
-                        <span class="dish-price">6,40€</span>
-                    </div>
-                </div>
-                <div class="dishes-list-item d-lg-flex gap-3 mb-3">
-                    <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
-                        <span class="dish-option"><i class="fa-solid fa-minus"></i></span>
-                        <span class="d-none d-lg-inline">1</span>
-                        <span class="dish-option"><i class="fa-solid fa-plus"></i></span>
-                    </div>
-                    <div class="d-flex  justify-content-between w-100">
-                        <span class="dish-info mb-2"><strong class="d-lg-none">1x</strong> nome Piatto </span>
-                        <span class="dish-price">6,40€</span>
+                        <span class="dish-info mb-2"><strong class="d-lg-none">{{dish.quantity}}x</strong> {{ dish.name
+                            }} </span>
+                        <span class="dish-price">{{ (dish.price * dish.quantity).toFixed(2) }} €</span>
                     </div>
                 </div>
 
-               
+
+
+
+            </section>
+
+            <section id="payment" v-if="store.cart.length !== 0">
+                <h2>Metodo di pagamento</h2>
 
             </section>
 
@@ -83,7 +87,7 @@ import Jumbotron from '../Jumbotron.vue';
         <form class="right-content">
 
             <!-- Dettagli consegna  -->
-            <section id="delivery">
+            <section id="delivery" v-if="store.cart.length !== 0">
                 <h2>Dettagli di consegna</h2>
                 <h5 class="mb-5">Inserisci i tuoi dati</h5>
                 <div class="row row-cols-1 row-cols-lg-2 justify-content-between align-items-baseline">
@@ -101,6 +105,11 @@ import Jumbotron from '../Jumbotron.vue';
                             name="customer_address" required></input>
                     </div>
                     <div class="cm-input-group col">
+                        <label for="city">Città</label>
+                        <input type="text" class="cm-input" id="city" value="Lamezia Terme, CZ 88046" disabled
+                            name="customer_address" required></input>
+                    </div>
+                    <div class="cm-input-group col">
                         <label for="email">Email</label>
                         <input type="email" class="cm-input" id="email" name="customer_email" required></input>
                     </div>
@@ -115,11 +124,11 @@ import Jumbotron from '../Jumbotron.vue';
             </section>
 
             <!-- riepilogo  -->
-            <section id="overview">
+            <section id="overview" v-if="store.cart.length !== 0">
                 <h2>Riepilogo</h2>
                 <div class="d-flex align-items-center justify-content-between ">
                     <p>Prodotto</p>
-                    <p>14,10 €</p>
+                    <p>{{ getTotalPrice }} €</p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between ">
                     <p>Consegna</p>
@@ -128,7 +137,7 @@ import Jumbotron from '../Jumbotron.vue';
                 <hr>
                 <div class="d-flex align-items-center justify-content-between">
                     <p><strong>TOTALE</strong></p>
-                    <p><strong>14,10 €</strong></p>
+                    <p><strong>{{ getTotalPrice }} €</strong></p>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-3">
                     <!-- <button class="cm-button">Conferma l'ordine</button> -->
@@ -142,7 +151,9 @@ import Jumbotron from '../Jumbotron.vue';
 <style lang='scss' scoped>
 @use '../../assets/scss/_vars.scss' as *;
 
-
+.container {
+    min-height: 17.4vh;
+}
 
 section {
     margin-bottom: 2rem;
@@ -173,6 +184,7 @@ hr {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    cursor: pointer;
     
 }
 
