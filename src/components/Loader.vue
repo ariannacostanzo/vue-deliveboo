@@ -20,7 +20,7 @@ export default {
     height: 100vh;
     width: 100%;
     position: fixed;
-    background: url(./assets/pizza-loader.gif) no-repeat center;
+    background: url(../assets/pizza-loader.gif) no-repeat center;
     background-size: 100%;
     z-index: 100;
 
