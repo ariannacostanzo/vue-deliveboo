@@ -4,6 +4,7 @@ import Jumbotron from './components/Jumbotron.vue';
 import AppFooter from './components/AppFooter.vue';
 import HomePage from './components/pages/HomePage.vue';
 import Loader from './components/Loader.vue'
+import {store} from './store.js';
 
 
 export default {
@@ -11,7 +12,8 @@ export default {
   components: { AppHeader, Jumbotron, AppFooter, HomePage, Loader },
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      store
     };
   },
   mounted() {

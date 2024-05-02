@@ -18,14 +18,15 @@ export default {
 
 <style scoped>
 .loader {
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     top: 90px;
     background: url(../assets/pizza-loader.gif) no-repeat center;
-    background-size: 100%;
+    background-size:cover;
     z-index: 100;
 
 }

@@ -9,15 +9,14 @@ import CartPage from "../components/pages/CartPage.vue";
 
 //definisco le rotte
 const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-
-        { path: '/', component: HomePage, name: 'home-page' },
-        { path: '/cart', component: CartPage, name: 'cart' },
-        { path: '/contact-us', component: ContactUsPage, name: 'contact-us' },
-        { path: '/restaurants/:id', component: RestaurantDetailPage, name: 'restaurant-detail' },
-        { path: '/:pathMatch(.*)*', component: NotFoundPage, name: 'not-found' },
-    ]
+  history: createWebHistory(),
+  routes: [
+    { path: "/", component: HomePage, name: "home-page" },
+    { path: "/cart", component: CartPage, name: "cart" },
+    { path: "/contact-us", component: ContactUsPage, name: "contact-us" },
+    { path: "/restaurants/:id", component: RestaurantDetailPage, name: "restaurant-detail"},
+    { path: "/:pathMatch(.*)*", redirect: { name: "home-page" } },
+  ],
 });
 
 //lo esporto

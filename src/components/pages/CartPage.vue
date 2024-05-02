@@ -70,7 +70,7 @@ import {store} from '../../store.js'
             </nav>
         </span>
     </div>
-    <div class="container mb-5 d-md-flex justify-content-between gap-5">
+    <div class="container mb-5 d-md-flex justify-content-between gap-5 cart-container">
 
 
         <div class="left-content">
@@ -184,8 +184,8 @@ import {store} from '../../store.js'
 <style lang='scss' scoped>
 @use '../../assets/scss/_vars.scss' as *;
 
-.container {
-    min-height: 9.5vh;
+.cart-container {
+    min-height: 30.5vh;
 }
 .orange {
     color: #f48c06;
