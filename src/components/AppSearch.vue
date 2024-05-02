@@ -108,27 +108,33 @@ export default {
 
 
             <!-- Restaurant Cards -->
-            <div class="container ">
+            <div class="container">
                 <section class="restaurant-container">
                     <div class="row gap-3 justify-content-center cards-row">
-
-                        <RouterLink :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
-                            class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
-                            :key="restaurant.id">
-                            <div class="restourant-image">
-                                <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
-                            </div>
-                            <div class="card-details content">
-                                <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
-                                <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
-                                    restaurant.address }}</p>
-                                <div class="pills-container">
-                                    <span class="pill" v-for="type in restaurant.types" :key="type.id">
-                                        {{ type.label }}
-                                    </span>
+                        <template v-if="filteredRestaurants.length > 0">
+                            <RouterLink :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
+                                class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
+                                :key="restaurant.id">
+                                <div class="restourant-image">
+                                    <img :src="restaurant.image" class="card-image" alt="Restaurant Image">
                                 </div>
+                                <div class="card-details content">
+                                    <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
+                                    <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
+                                        restaurant.address }}</p>
+                                    <div class="pills-container">
+                                        <span class="pill" v-for="type in restaurant.types" :key="type.id">
+                                            {{ type.label }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </RouterLink>
+                        </template>
+                        <template v-else>
+                            <div class="no-results-card">
+                                <h2 class="no-results-text">Non ci sono risultati per queste ricerche.</h2>
                             </div>
-                        </RouterLink>
+                        </template>
                     </div>
                 </section>
             </div>
@@ -261,8 +267,8 @@ a {
     transition: 0.3s ease-in-out;
     border-radius: 15px;
 
-    position: relative;
-    z-index: 2;
+    // position: relative;
+    // z-index: 2;
 }
 
 .restaurant-card:hover {
@@ -312,5 +318,21 @@ a {
     border-radius: 15px;
     margin: 5px;
     font-size: 14px;
+}
+
+.no-results-card {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+
+    background-color: #fff;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: 0.3s ease-in-out;
+    border-radius: 15px;
+
 }
 </style>

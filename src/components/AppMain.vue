@@ -205,7 +205,7 @@ export default {
     padding-top: 100px;
     padding-bottom: 120px;
     width: 100%;
-    background: white;
+    // background: white;
     position: relative;
 }
 
