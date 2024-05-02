@@ -131,7 +131,7 @@ export default {
     <div class="container">
         <div class="row">
             <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id"
-                class="col-lg-2 col-md-4 col-sm-6">
+                @click="populateModal(dish)" class="col-lg-2 col-md-4 col-sm-6">
                 <div class="my-card">
                     <div class="card-image">
                         <img v-if="dish.image" :src="dish.image" :alt="dish.name">
