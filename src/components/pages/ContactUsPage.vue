@@ -10,18 +10,18 @@ export default {
     <Jumbotron/>
     <h1 class="text-center mt-5">Contattaci</h1>
     <div class="d-flex flex-column align-items-center justify-content-center container">
-        <p class="my-5 text-center"><strong>Per altre informazioni potete contattarci tramite email o direttamente parlare con un nostro operatore.</strong></p>
+        <p class="my-5 text-center"><strong>Per altre informazioni potete contattarci tramite email o parlare direttamente con un nostro operatore.</strong></p>
         <span><strong>Email:</strong> clientsupport@delivebool.com</span>
-        <span><strong>Telefono:</strong> 3904456781</span>
+        <span><strong>Telefono:</strong> +39 3904456781</span>
     </div>
 </template>
 
 <style lang='scss' scoped>
 p{
-    font-size: 20px;
+    font-size: 30px;
 }
 span {
-    font-size: 20px;
+    font-size: 30px;
 }
 div{
     @media (min-width: 425px) {
