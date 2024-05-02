@@ -57,7 +57,22 @@ import {store} from '../../store.js'
 
 <template>
     <Jumbotron />
-    <div class="container my-5 d-md-flex justify-content-between gap-5">
+    <div class="container">
+        <span class="orange">
+            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item text-decoration-underline">
+                        <RouterLink :to="{ name: 'home-page', }">Home</RouterLink>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Carrello</li>
+                </ol>
+            </nav>
+        </span>
+    </div>
+    <div class="container mb-5 d-md-flex justify-content-between gap-5">
+
+
         <div class="left-content">
 
             <!-- riepilogo piatti -->
@@ -170,9 +185,11 @@ import {store} from '../../store.js'
 @use '../../assets/scss/_vars.scss' as *;
 
 .container {
-    min-height: 17.4vh;
+    min-height: 9.5vh;
 }
-
+.orange {
+    color: #f48c06;
+}
 section {
     margin-bottom: 2rem;
 
