@@ -8,7 +8,7 @@ export default {
 
 <template>
     <footer class="py-4">
-        <div class="container-sm">
+        <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <!-- Logo -->
                 <div class="mb-3 mb-md-0">
@@ -19,7 +19,7 @@ export default {
 
                 <!-- Social Icons -->
                 <div class="mb-3 mb-md-0">
-                    <div class="social-icons ps-3">
+                    <div class="social-icons">
                         <ul class="list-inline mb-0 d-flex justify-content-center justify-content-md-start pt-3">
                             <li class="list-inline-item"><a href="https://www.facebook.com/" target="_blank"><i
                                         class="fab fa-facebook"></i></a></li>
@@ -36,16 +36,18 @@ export default {
                 </div>
 
                 <!-- Footer Links -->
-                <div class="mb-3 footer-links ps-3">
-                    <ul class="list-unstyled mb-0 d-flex flex-wrap justify-content-center justify-content-md-end pt-3">
-                        <li><a class="text-decoration-none text-black">FAQ</a></li>
-                        <li><a class="text-decoration-none text-black">Supporto</a></li>
-                        <li>
-                            <RouterLink :to="{ name: 'contact-us' }" class="text-decoration-none text-black">Contatti
-                            </RouterLink>
-                        </li>
-                        <li><a class="text-decoration-none text-black">Termini e condizioni</a></li>
-                    </ul>
+                <div>
+                    <div class="footer-links">
+                        <ul class="list-unstyled mb-0 d-flex justify-content-center justify-content-md-end pt-3">
+                            <li><a class="text-decoration-none text-black">FAQ</a></li>
+                            <li><a class="text-decoration-none text-black">Supporto</a></li>
+                            <li>
+                                <RouterLink :to="{ name: 'contact-us' }" class="text-decoration-none text-black">
+                                    Contatti</RouterLink>
+                            </li>
+                            <li><a class="text-decoration-none text-black">Termini e condizioni</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
