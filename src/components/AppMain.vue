@@ -1,16 +1,28 @@
 <script>
+import Loader from './Loader.vue';
+
+
 export default {
     name: 'AppMain',
+    components: { Loader },
+
     data() {
         return {
+            isLoading: true
 
         }
     },
+    mounted() {
+        setTimeout(() => {
+            this.isLoading = false;
+        }, 2000);
+    }
 }
 </script>
 
 <template>
-    
+    <Loader :isLoading="isLoading" />
+
     <main class="">
 
 

@@ -25,12 +25,10 @@ export default {
 </script>
 
 <template>
-  <div>
-    <Loader :isLoading="isLoading" />
-  </div>
 
   <div>
     <AppHeader />
+    <!-- <Loader :isLoading="isLoading" />-->
     <!-- <Jumbotron /> -->
     <!-- <HomePage /> -->
     <RouterView />
