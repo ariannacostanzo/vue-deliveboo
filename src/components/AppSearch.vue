@@ -13,7 +13,7 @@ export default {
             selectedFilters: []
         };
     },
-    components: {Jumbotron},
+    components: { Jumbotron },
     methods: {
         async searchRestaurants() {
             if (this.searchTerm.trim() !== '') {
@@ -120,7 +120,7 @@ export default {
                             <div class="card-details content">
                                 <h3 class="restaurant-name"><i class="fas fa-store"></i> {{ restaurant.name }}</h3>
                                 <p class="restaurant-address"><i class="fas fa-map-marker-alt"></i> {{
-                                    restaurant.address }}</p>
+                    restaurant.address }}</p>
                             </div>
                         </RouterLink>
                     </div>
@@ -131,7 +131,6 @@ export default {
 </template>
 
 <style lang='scss' scoped>
-
 a {
     text-decoration: none;
     color: #212529;

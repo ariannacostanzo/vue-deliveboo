@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoading" class="loading">
-        <div class="loader "></div>
+        <div class="loader-secondary"></div>
     </div>
 </template>
 
@@ -17,12 +17,12 @@ export default {
 </script>
 
 <style scoped>
-.loader {
+.loader-secondary {
     height: 100vh;
     width: 100%;
     position: fixed;
-    background: url(../assets/pizza-loader.gif) no-repeat center;
-    background-size: 100%;
+    background: #fff url(../assets/loader-point.gif) no-repeat center;
+
     z-index: 100;
 
 }
