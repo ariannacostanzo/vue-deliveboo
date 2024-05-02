@@ -33,6 +33,24 @@ import {store} from '../../store.js'
                 dish.quantity++;
             }
         }
+    },
+    mounted() {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            try {
+                store.cart = JSON.parse(savedCart);
+            } catch (error) {
+                console.error('Error parsing cart data from local storage:', error);
+            }
+        }
+    },
+    watch: {
+        'store.cart': {
+            handler(newCart) {
+                localStorage.setItem('cart', JSON.stringify(newCart));
+            },
+            deep: true
+        }
     }
   }
 </script>
