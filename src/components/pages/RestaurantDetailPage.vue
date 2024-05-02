@@ -1,8 +1,8 @@
 <script>
 import { store } from '../../store.js';
 import axios from 'axios';
-import Loader from '../Loader.vue';
 import { RouterLink } from 'vue-router';
+import Loader from '../Loader.vue';
 const defaultEndpoint = 'http://localhost:8000/api/restaurants/';
 
 export default {
@@ -14,16 +14,22 @@ export default {
         store,
         isModalVisible: false,
         currentDishQuantity: 1,
-        currentDish: null
+        currentDish: null,
+        isLoading: false
 
     }),
     methods: {
         getRestaurant() {
+            this.isLoading = true;
+
             axios.get(defaultEndpoint + this.$route.params.id)
                 .then(res => {
                     this.restaurants = res.data
                 })
                 .catch(err => { console.error(err.message) })
+                .finally(() => {
+                    this.isLoading = false;
+                });
         },
         addToCart(dish) {
             
@@ -102,75 +108,81 @@ export default {
 </script>
 
 <template>
-
-    <section class="my-jumbotron">
-        <div class="text-container">
-            <h2 class="text-center mt-3">{{ restaurants.name }}</h2>
-            <address class="text-center"> {{ restaurants.address }}</address>
-        </div>
-        <img :src="restaurants.image" alt="">
-    </section>
-
-
-    <!-- <img v-if="restaurants.image" :src="restaurants.image" :alt="restaurants.name"
-        class="img-fluid mx-auto d-block mb-5" style="width: 500px"> -->
-    <h4 class="text-center  my-5">Scegli cosa ordinare</h4>
-    <div class="container mb-5">
-        <span class="orange">
-            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-                aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item text-decoration-underline">
-                        <RouterLink :to="{ name: 'home-page', }">Home</RouterLink>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ restaurants.name }}</li>
-                </ol>
-            </nav>
-        </span>
+    <div>
+        <Loader :isLoading="isLoading" />
     </div>
-    <div class="container">
-        <div class="row">
-            <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id"
-                @click="populateModal(dish)" class="col-lg-2 col-md-4 col-sm-6">
-                <div class="my-card">
-                    <div class="card-image">
-                        <img v-if="dish.image" :src="dish.image" :alt="dish.name">
-                    </div>
-                    <div class="card-content d-flex flex-column justify-content-between">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="card-text"> {{ dish.price }}€</p>
-                            <span class="plus-button"><i class="fa-solid fa-plus"></i></span>
+
+    <div v-if="restaurants">
+        <section class="my-jumbotron">
+            <div class="text-container">
+                <h2 class="text-center mt-3">{{ restaurants.name }}</h2>
+                <address class="text-center"> {{ restaurants.address }}</address>
+            </div>
+            <img :src="restaurants.image" alt="">
+        </section>
+
+
+        <!-- <img v-if="restaurants.image" :src="restaurants.image" :alt="restaurants.name"
+        class="img-fluid mx-auto d-block mb-5" style="width: 500px"> -->
+        <h4 class="text-center  my-5">Scegli cosa ordinare</h4>
+        <div class="container mb-5">
+            <span class="orange">
+                <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+                    aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item text-decoration-underline">
+                            <RouterLink :to="{ name: 'home-page', }">Home</RouterLink>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ restaurants.name }}</li>
+                    </ol>
+                </nav>
+            </span>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id"
+                    @click="populateModal(dish)" class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="my-card">
+                        <div class="card-image">
+                            <img v-if="dish.image" :src="dish.image" :alt="dish.name">
+                        </div>
+                        <div class="card-content d-flex flex-column justify-content-between">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-text"> {{ dish.price }}€</p>
+                                <span class="plus-button"><i class="fa-solid fa-plus"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- modale  -->
-        <div v-if="isModalVisible" class="dish-modal-container">
-            <div class="dish-modal">
-                <div class="d-flex align-items-center justify-content-between">
-                    <h5>{{ currentDish.name }}</h5>
-                    <span @click="closeModal" class="close-btn"><i class="fa-solid fa-x"></i></span>
-                </div>
-                <p class="ingredients">{{ currentDish.ingredients }}</p>
-                <p>{{ currentDish.price }} €</p>
-                <div class="d-flex align-items-center justify-content-center gap-5">
-                    <span class="dish-option">
-                        <i class="fa-solid fa-minus" @click="changeQuantity('less')"></i>
-                    </span>
-                    <span>{{ currentDishQuantity }}</span>
-                    <span class="dish-option">
-                        <i class="fa-solid fa-plus" @click="changeQuantity('more')"></i>
-                    </span>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{
-                        currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
-                        €</button>
+            <!-- modale  -->
+            <div v-if="isModalVisible" class="dish-modal-container">
+                <div class="dish-modal">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h5>{{ currentDish.name }}</h5>
+                        <span @click="closeModal" class="close-btn"><i class="fa-solid fa-x"></i></span>
+                    </div>
+                    <p class="ingredients">{{ currentDish.ingredients }}</p>
+                    <p>{{ currentDish.price }} €</p>
+                    <div class="d-flex align-items-center justify-content-center gap-5">
+                        <span class="dish-option">
+                            <i class="fa-solid fa-minus" @click="changeQuantity('less')"></i>
+                        </span>
+                        <span>{{ currentDishQuantity }}</span>
+                        <span class="dish-option">
+                            <i class="fa-solid fa-plus" @click="changeQuantity('more')"></i>
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{
+                            currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
+                            €</button>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>

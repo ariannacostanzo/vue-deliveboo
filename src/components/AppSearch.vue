@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { RouterLink } from 'vue-router';
 import Jumbotron from './Jumbotron.vue';
+import Loader from './Loader.vue';
 
 export default {
     name: 'AppSearch',
@@ -10,10 +11,11 @@ export default {
             searchTerm: '',
             restaurants: [],
             types: [],
-            selectedFilters: []
+            selectedFilters: [],
+            isLoading: false
         };
     },
-    components: {Jumbotron},
+    components: { Jumbotron, Loader },
     methods: {
         async searchRestaurants() {
             if (this.searchTerm.trim() !== '') {
@@ -24,7 +26,7 @@ export default {
                     );
                 } catch (error) {
                     console.error(error);
-                }
+                } then (this.isLoading = false)
             } else {
                 // Aggiorna la lista completa se la barra di ricerca è vuota
                 this.fetchRestaurants();
@@ -85,7 +87,7 @@ export default {
 
 <template>
     <Jumbotron />
-    <div class="">
+    <div class="search-section">
         <!-- Search Bar -->
         <div class="container d-flex justify-content-center flex-column text-center mt-5">
             <h1 class="title-jumbotron grower animated" ref="grower">Il bello è prenderci gusto</h1>
@@ -113,7 +115,7 @@ export default {
             <!-- Restaurant Cards -->
             <div class="container">
                 <section class="restaurant-container">
-                    <div class="row gap-3 justify-content-center cards-row">
+                    <div class="row gap-3 justify-content-center cards-row mb-5">
                         <template v-if="filteredRestaurants.length > 0">
                             <RouterLink :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
                                 class="restaurant-card" v-for="(restaurant, index) in filteredRestaurants"
@@ -149,6 +151,10 @@ export default {
 a {
     text-decoration: none;
     color: #212529;
+}
+
+.search-section {
+    margin-bottom: 5rem;
 }
 
 // Search Bar Styles 

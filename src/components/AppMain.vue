@@ -1,8 +1,14 @@
 <script>
+import Loader from './Loader.vue';
+
+
 export default {
     name: 'AppMain',
+    components: { Loader },
+
     data() {
         return {
+            isLoading: true
 
         }
     },
@@ -15,6 +21,9 @@ export default {
                 console.error('Error parsing cart data from local storage:', error);
             }
         }
+        setTimeout(() => {
+            this.isLoading = false;
+        }, 1000);
     },
     watch: {
         'store.cart': {
@@ -23,18 +32,20 @@ export default {
             },
             deep: true
         }
+        
     }
 }
 </script>
 
 <template>
-    
+    <Loader :isLoading="isLoading" />
+
     <main class="">
 
 
 
         <!--SVG UPPER WAVE-->
-        <div class="background-wave">
+        <div class="background-wave " >
             <svg class="upper" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#fff9e6" fill-opacity="1" d="M0,288L48,293.3C96,299,192,309,288,
                 304C384,299,480,277,576,245.3C672,213,768,171,864,170.7C960,171,
@@ -210,6 +221,7 @@ export default {
 }
 
 .upper {
+    margin-top: 2rem;
     position: absolute;
     bottom: -7px;
     left: 0;
