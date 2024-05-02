@@ -25,13 +25,31 @@ export default {
                 .catch(err => { console.error(err.message) })
         },
         addToCart(dish) {
-            const { id, name, price } = dish;
-            const existingItem = this.store.cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity += this.currentDishQuantity;
+            
+            const { id, name, price, restaurant_id } = dish;
+            if(store.cart.length > 0) {
+                if (store.currentRestaurantId === restaurant_id) {
+                    const existingItem = this.store.cart.find(item => item.id === id);
+                    if (existingItem) {
+                        existingItem.quantity += this.currentDishQuantity;
+                        // localStorage.cart = JSON.stringify(this.store.cart)
+                    } else {
+                        store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
+                        
+                        // localStorage.cart = JSON.stringify(this.store.cart)
+                    }
+                } else {
+                    alert('Non puoi ordinare da due ristoranti diversi. Per ordinare qui l\'ordine precedente verrà cancellato')
+                    this.store.cart = [];
+                    store.currentRestaurantId = null;
+                    this.addToCart(dish)
+                }
+
             } else {
-                this.store.cart.push({ id, name, price, quantity: this.currentDishQuantity });
+                store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
+                store.currentRestaurantId = restaurant_id;
             }
+            
             this.closeModal();
         },
         populateModal(dish) {
@@ -60,6 +78,24 @@ export default {
     },
     created() {
         this.getRestaurant();
+    },
+    mounted() {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            try {
+                store.cart = JSON.parse(savedCart);
+            } catch (error) {
+                console.error('Error parsing cart data from local storage:', error);
+            }
+        }
+    },
+    watch: {
+        'store.cart' : {
+            handler(newCart) {
+                localStorage.setItem('cart', JSON.stringify(newCart));
+            },
+            deep: true
+        }
     }
 };
 </script>
@@ -97,7 +133,7 @@ export default {
                     <span @click="closeModal" class="close-btn"><i class="fa-solid fa-x"></i></span>
                 </div>
                 <p class="ingredients">{{ currentDish.ingredients }}</p>
-                <p>{{currentDish.price}} €</p>
+                <p>{{ currentDish.price }} €</p>
                 <div class="d-flex align-items-center justify-content-center gap-5">
                     <span class="dish-option">
                         <i class="fa-solid fa-minus" @click="changeQuantity('less')"></i>
@@ -108,7 +144,8 @@ export default {
                     </span>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{ currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
+                    <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{
+                        currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
                         €</button>
                 </div>
             </div>
@@ -137,7 +174,7 @@ export default {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    
+
 }
 
 .dish-modal {
@@ -154,6 +191,7 @@ export default {
         color: grey;
         font-size: 14px;
     }
+
     .dish-option {
         padding: 10px;
         background-color: #f48d06ad;
