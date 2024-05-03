@@ -1,6 +1,6 @@
 <script>
 import Loader from './Loader.vue';
-
+import {store} from '../store.js'
 
 export default {
     name: 'AppMain',
@@ -8,7 +8,8 @@ export default {
 
     data() {
         return {
-            isLoading: true
+            isLoading: true,
+            store
 
         }
     },

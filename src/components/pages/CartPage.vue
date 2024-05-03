@@ -70,7 +70,7 @@ import {store} from '../../store.js'
             </nav>
         </span>
     </div>
-    <div class="container mb-5 d-md-flex justify-content-between gap-5">
+    <div class="container mb-5 d-md-flex justify-content-between gap-5 cart-container">
 
 
         <div class="left-content">
@@ -84,7 +84,7 @@ import {store} from '../../store.js'
                     <h2>Il tuo ordine</h2>
                     <p>{{ store.totalQuantity }} <span v-if="store.totalQuantity === 1">prodotto</span>
                         <span v-else>prodotti</span>
-                        da <strong>Nome Ristorante</strong>
+                        da <strong>{{ store.restaurantName }}</strong>
                     </p>
                 </div>
 
@@ -111,7 +111,8 @@ import {store} from '../../store.js'
 
             <section id="payment" v-if="store.cart.length !== 0">
                 <h2>Metodo di pagamento</h2>
-
+                <!-- <div id="dropin-container"></div>
+                <button id="submit-button" class="button button--small button--green">Purchase</button> -->
             </section>
 
 
@@ -179,13 +180,15 @@ import {store} from '../../store.js'
             </section>
         </form>
     </div>
+
+    
 </template>
 
 <style lang='scss' scoped>
 @use '../../assets/scss/_vars.scss' as *;
 
-.container {
-    min-height: 9.5vh;
+.cart-container {
+    min-height: 30.5vh;
 }
 .orange {
     color: #f48c06;
@@ -251,6 +254,42 @@ hr {
     display: flex;
     margin-top: .2rem;
 
+}
+
+//pagamento
+
+.button {
+    cursor: pointer;
+    font-weight: 500;
+    left: 3px;
+    line-height: inherit;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    display: inline-block;
+}
+
+.button--small {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+}
+
+.button--green {
+    outline: none;
+    background-color: #f48c06;
+    border-color: #f48c06;
+    color: white;
+    transition: all 200ms ease;
+}
+
+.button--green:hover {
+    background-color: #d67c06;
+    color: white;
 }
 
 

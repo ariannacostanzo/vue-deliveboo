@@ -13,11 +13,17 @@ export default {
         dishes: null,
         store,
         isModalVisible: false,
+        isDeleteModalVisible: false,
         currentDishQuantity: 1,
         currentDish: null,
-        isLoading: false
+        isLoading: false,
 
     }),
+    computed: {
+        numberInput() {
+            return parseInt(this.currentDishQuantity)
+        }
+    },
     methods: {
         getRestaurant() {
             this.isLoading = true;
@@ -42,19 +48,26 @@ export default {
                         // localStorage.cart = JSON.stringify(this.store.cart)
                     } else {
                         store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
-                        
+                        store.restaurantName = this.restaurants.name
                         // localStorage.cart = JSON.stringify(this.store.cart)
                     }
                 } else {
-                    alert('Non puoi ordinare da due ristoranti diversi. Per ordinare qui l\'ordine precedente verrà cancellato')
-                    this.store.cart = [];
-                    store.currentRestaurantId = null;
-                    this.addToCart(dish)
+                    // this.isDeleteModalVisible = true;
+                    if (window.confirm('Non puoi ordinare da due ristoranti diversi. Per ordinare qui l\'ordine precedente verrà cancellato')) {
+                        this.store.cart = [];
+                        store.currentRestaurantId = null;
+                        this.addToCart(dish)
+                    } else {
+                        return
+                    }
+                    
                 }
 
             } else {
                 store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
                 store.currentRestaurantId = restaurant_id;
+                store.restaurantName = this.restaurants.name
+                
             }
             
             this.closeModal();
@@ -85,6 +98,7 @@ export default {
     },
     created() {
         this.getRestaurant();
+        
     },
     mounted() {
         const savedCart = localStorage.getItem('cart');
@@ -139,9 +153,9 @@ export default {
             </span>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7">
                 <div v-if="restaurants.dishes" v-for="dish in restaurants.dishes" :key="dish.id"
-                    @click="populateModal(dish)" class="col-lg-2 col-md-4 col-sm-6">
+                    @click="populateModal(dish)" class="col">
                     <div class="my-card">
                         <div class="card-image">
                             <img v-if="dish.image" :src="dish.image" :alt="dish.name">
@@ -167,18 +181,32 @@ export default {
                     <p class="ingredients">{{ currentDish.ingredients }}</p>
                     <p>{{ currentDish.price }} €</p>
                     <div class="d-flex align-items-center justify-content-center gap-5">
-                        <span class="dish-option">
-                            <i class="fa-solid fa-minus" @click="changeQuantity('less')"></i>
+                        <span class="dish-option" @click="changeQuantity('less')">
+                            <i class="fa-solid fa-minus"></i>
                         </span>
+                        <!-- <input type="text" class="dish-quantity" 
+                            v-model="(currentDishQuantity)"> -->
                         <span>{{ currentDishQuantity }}</span>
-                        <span class="dish-option">
-                            <i class="fa-solid fa-plus" @click="changeQuantity('more')"></i>
+                        <span class="dish-option" @click="changeQuantity('more')">
+                            <i class="fa-solid fa-plus"></i>
                         </span>
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
                         <button type="button" class="cm-button mt-5" @click="addToCart(currentDish)">Aggiungine {{
                             currentDishQuantity }} a {{ (currentDish.price * currentDishQuantity).toFixed(2) }}
                             €</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- modale cancellazione carrello  -->
+            <div v-show="isDeleteModalVisible" class="delete-modal-container">
+                <div class="delete-modal">
+                    <p>Non puoi ordinare da ristoranti diversi. Per ordinare qui l'ordine precedente verrà cancellato
+                    </p>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button class="cm-button">Conferma</button>
+                        <button class="cm-button">Annulla</button>
                     </div>
                 </div>
             </div>
@@ -192,10 +220,20 @@ export default {
     color: #f48c06;
 }
 
+.dish-quantity {
+    border: 0;
+    width: 50px;
+    text-align: center;
+
+    &:focus-visible {
+        outline: 1px solid #f48c06;
+    }
+}
+
 .my-jumbotron {
     height: 300px;
     opacity: 0.9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0px 1px  rgba(0, 0, 0, 0.8);
     position: relative;
 
 }
@@ -257,6 +295,28 @@ address {
 
 }
 
+.delete-modal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+
+    
+}
+.delete-modal {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 20px;
+    width: 90%;
+    padding: 2rem;
+}
+
 .dish-modal-container {
     position: fixed;
     left: 0;
@@ -279,7 +339,7 @@ address {
 
     .ingredients {
         color: grey;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .dish-option {
@@ -300,12 +360,33 @@ address {
         border-radius: 50%;
     }
 }
+@media screen and (min-width: 500px) {
 
+    .delete-modal {
+        width: 70%;
+    }
+}
 @media screen and (min-width: 900px) {
     .dish-modal {
         width: 35%;
     }
+
+    .delete-modal {
+        width: 35%;
+    }
 }
+
+@media screen and (min-width: 1200px) {
+    .dish-modal {
+        width: 35%;
+    }
+
+    .delete-modal {
+        width: 25%;
+    }
+}
+
+
 
 .my-card {
     margin-bottom: 30px;
