@@ -1,9 +1,10 @@
 <script>
 import Jumbotron from '../Jumbotron.vue';
+import Braintree from '../Breintree.vue';
 import {store} from '../../store.js'
   export default {
     name: 'CartPage',
-    components: {Jumbotron},
+    components: {Jumbotron , Braintree},
     data() {
         return {
             store,
@@ -174,8 +175,9 @@ import {store} from '../../store.js'
                     <p><strong>{{ getTotalPrice }} €</strong></p>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-3">
-                    <!-- <button class="cm-button">Conferma l'ordine</button> -->
-                    <button class="cm-button w-75">Vai al pagamento</button>
+                    <!-- <button class="cm-button">Conferma l'ordine</button> 
+                    <button class="cm-button w-75">Vai al pagamento</button>-->
+                    <Braintree />
                 </div>
             </section>
         </form>
