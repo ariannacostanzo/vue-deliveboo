@@ -19,6 +19,11 @@ export default {
         isLoading: false,
 
     }),
+    computed: {
+        numberInput() {
+            return parseInt(this.currentDishQuantity)
+        }
+    },
     methods: {
         getRestaurant() {
             this.isLoading = true;
@@ -43,7 +48,7 @@ export default {
                         // localStorage.cart = JSON.stringify(this.store.cart)
                     } else {
                         store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
-                        
+                        store.restaurantName = this.restaurants.name
                         // localStorage.cart = JSON.stringify(this.store.cart)
                     }
                 } else {
@@ -61,6 +66,8 @@ export default {
             } else {
                 store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
                 store.currentRestaurantId = restaurant_id;
+                store.restaurantName = this.restaurants.name
+                
             }
             
             this.closeModal();
@@ -91,6 +98,7 @@ export default {
     },
     created() {
         this.getRestaurant();
+        
     },
     mounted() {
         const savedCart = localStorage.getItem('cart');
@@ -176,8 +184,8 @@ export default {
                         <span class="dish-option" @click="changeQuantity('less')">
                             <i class="fa-solid fa-minus"></i>
                         </span>
-                        <!-- <input type="text" class="dish-quantity" :value="currentDishQuantity"
-                            v-model="currentDishQuantity"> -->
+                        <!-- <input type="text" class="dish-quantity" 
+                            v-model="(currentDishQuantity)"> -->
                         <span>{{ currentDishQuantity }}</span>
                         <span class="dish-option" @click="changeQuantity('more')">
                             <i class="fa-solid fa-plus"></i>
