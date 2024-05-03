@@ -112,6 +112,7 @@ import {store} from '../../store.js'
 
             <section id="payment" v-if="store.cart.length !== 0">
                 <h2>Metodo di pagamento</h2>
+                <Braintree />
                 <!-- <div id="dropin-container"></div>
                 <button id="submit-button" class="button button--small button--green">Purchase</button> -->
             </section>
@@ -119,7 +120,7 @@ import {store} from '../../store.js'
 
         </div>
 
-        <form class="right-content">
+        <div class="right-content">
 
             <!-- Dettagli consegna  -->
             <section id="delivery" v-if="store.cart.length !== 0">
@@ -177,13 +178,14 @@ import {store} from '../../store.js'
                 <div class="d-flex align-items-center justify-content-center mt-3">
                     <!-- <button class="cm-button">Conferma l'ordine</button> 
                     <button class="cm-button w-75">Vai al pagamento</button>-->
-                    <Braintree />
+
+
                 </div>
             </section>
-        </form>
+        </div>
     </div>
 
-    
+
 </template>
 
 <style lang='scss' scoped>
