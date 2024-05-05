@@ -49,9 +49,9 @@ export default {
             } else {
                 this.selectedFilters.splice(index, 1);
             }
-
-            // Aggiorna i ristoranti filtrati ogni volta che un filtro viene modificato
-            this.updateFilteredRestaurants();
+        },
+        isFilterSelected(filter) {
+            return this.selectedFilters.includes(filter.toLowerCase());
         },
         updateFilteredRestaurants() {
             if (this.selectedFilters.length > 0) {
@@ -61,21 +61,27 @@ export default {
                     });
                 });
             } else {
+                // Se non ci sono filtri selezionati, visualizza tutti i ristoranti
                 this.searchRestaurants();
             }
-        },
-        isFilterSelected(filter) {
-            return this.selectedFilters.includes(filter.toLowerCase());
         },
     },
     computed: {
         filteredRestaurants() {
-            return this.restaurants;
+            if (this.selectedFilters.length === 0) {
+                return this.restaurants;
+            } else {
+                return this.restaurants.filter(restaurant =>
+                    this.selectedFilters.every(filter =>
+                        restaurant.types.some(type => type.label.toLowerCase() === filter)
+                    )
+                );
+            }
         }
     },
     created() {
         this.fetchTypes();
-        this.searchRestaurants(); // Esegui una ricerca all'avvio per mostrare i ristoranti disponibili
+        this.searchRestaurants();
     }
 }
 </script>
