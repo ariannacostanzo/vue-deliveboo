@@ -1,9 +1,10 @@
 <script>
 import Jumbotron from '../Jumbotron.vue';
+import Braintree from '../Breintree.vue';
 import {store} from '../../store.js'
   export default {
     name: 'CartPage',
-    components: {Jumbotron},
+    components: {Jumbotron , Braintree},
     data() {
         return {
             store,
@@ -15,7 +16,7 @@ import {store} from '../../store.js'
             store.cart.forEach(dish => {
                 totalPrice += parseFloat(dish.price) * dish.quantity;
             })
-            store.totalPrice = totalPrice.toFixed(2);
+            store.totalPrice = parseInt(totalPrice.toFixed(2));
             return store.totalPrice
         },
     },
@@ -34,24 +35,48 @@ import {store} from '../../store.js'
             }
         }
     },
+    //store in localStorage
     mounted() {
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
+        const savedStore = localStorage.getItem('store');
+        if (savedStore) {
             try {
-                store.cart = JSON.parse(savedCart);
+                // Parse the saved store object from local storage
+                const parsedStore = JSON.parse(savedStore);
+                // Update each property of the reactive store with the parsed values
+                Object.assign(store, parsedStore);
             } catch (error) {
-                console.error('Error parsing cart data from local storage:', error);
+                console.error('Error parsing store data from local storage:', error);
             }
         }
     },
     watch: {
-        'store.cart': {
-            handler(newCart) {
-                localStorage.setItem('cart', JSON.stringify(newCart));
+        store: {
+            handler(newStore) {
+                localStorage.setItem('store', JSON.stringify(newStore));
             },
             deep: true
         }
     }
+    //questo è quello del carrello, che non salva perà il fatto che l'ordine sia stato inviato e viene
+    //preparato, ricopiare questo in caso le cose non funzionino
+    // mounted() {
+    //     const savedCart = localStorage.getItem('cart');
+    //     if (savedCart) {
+    //         try {
+    //             store.cart = JSON.parse(savedCart);
+    //         } catch (error) {
+    //             console.error('Error parsing cart data from local storage:', error);
+    //         }
+    //     }
+    // },
+    // watch: {
+    //     'store.cart': {
+    //         handler(newCart) {
+    //             localStorage.setItem('cart', JSON.stringify(newCart));
+    //         },
+    //         deep: true
+    //     }
+    // }
   }
 </script>
 
@@ -70,24 +95,21 @@ import {store} from '../../store.js'
             </nav>
         </span>
     </div>
-    <div class="container mb-5 d-md-flex justify-content-between gap-5 cart-container">
+    <div class="container cart-container" v-if="store.cart.length === 0">
+        <h2>Nessun ordine</h2>
+    </div>
+    <div class="container mb-5 d-md-flex justify-content-between gap-5" v-else>
 
 
         <div class="left-content">
 
             <!-- riepilogo piatti -->
             <section id="dishes">
-                <div v-if="store.cart.length === 0">
-                    <h2>Nessun ordine</h2>
-                </div>
-                <div v-else>
-                    <h2>Il tuo ordine</h2>
-                    <p>{{ store.totalQuantity }} <span v-if="store.totalQuantity === 1">prodotto</span>
-                        <span v-else>prodotti</span>
-                        da <strong>{{ store.restaurantName }}</strong>
-                    </p>
-                </div>
-
+                <h2>Il tuo ordine</h2>
+                <p>{{ store.totalQuantity }} <span v-if="store.totalQuantity === 1">prodotto</span>
+                    <span v-else>prodotti</span>
+                    da <strong>{{ store.restaurantName }}</strong>
+                </p>
                 <!-- list item  -->
                 <div v-for="dish in store.cart" class="dishes-list-item d-lg-flex gap-3 mb-3">
                     <div class="d-flex align-items-center justify-content-between gap-lg-3 mb-2">
@@ -103,62 +125,10 @@ import {store} from '../../store.js'
                         <span class="dish-price">{{ (dish.price * dish.quantity).toFixed(2) }} €</span>
                     </div>
                 </div>
-
-
-
-
-            </section>
-
-            <section id="payment" v-if="store.cart.length !== 0">
-                <h2>Metodo di pagamento</h2>
-                <!-- <div id="dropin-container"></div>
-                <button id="submit-button" class="button button--small button--green">Purchase</button> -->
-            </section>
-
-
-        </div>
-
-        <form class="right-content">
-
-            <!-- Dettagli consegna  -->
-            <section id="delivery" v-if="store.cart.length !== 0">
-                <h2>Dettagli di consegna</h2>
-                <h5 class="mb-5">Inserisci i tuoi dati</h5>
-                <div class="row row-cols-1 row-cols-lg-2 justify-content-between align-items-baseline">
-                    <div class="cm-input-group col">
-                        <label for="name">Nome</label>
-                        <input type="text" class="cm-input" id="name" name="customer_name" required></input>
-                    </div>
-                    <div class="cm-input-group col">
-                        <label for="surname">Cognome</label>
-                        <input type="text" class="cm-input" id="surname" name="customer_surname" required></input>
-                    </div>
-                    <div class="cm-input-group col">
-                        <label for="address">Indirizzo</label>
-                        <input type="text" class="cm-input" id="address" placeholder="via Roma 15"
-                            name="customer_address" required></input>
-                    </div>
-                    <div class="cm-input-group col">
-                        <label for="city">Città</label>
-                        <input type="text" class="cm-input" id="city" value="Lamezia Terme, CZ 88046" disabled
-                            name="customer_address" required></input>
-                    </div>
-                    <div class="cm-input-group col">
-                        <label for="email">Email</label>
-                        <input type="email" class="cm-input" id="email" name="customer_email" required></input>
-                    </div>
-                    <div class="cm-input-group col">
-                        <label for="phone_number">Numero di telefono</label>
-                        <input type="text" class="cm-input" id="phone_number" placeholder="+39315224451"
-                            name="customer_phone_number" required></input>
-                    </div>
-                </div>
-
-
             </section>
 
             <!-- riepilogo  -->
-            <section id="overview" v-if="store.cart.length !== 0">
+            <section id="overview">
                 <h2>Riepilogo</h2>
                 <div class="d-flex align-items-center justify-content-between ">
                     <p>Prodotto</p>
@@ -173,22 +143,23 @@ import {store} from '../../store.js'
                     <p><strong>TOTALE</strong></p>
                     <p><strong>{{ getTotalPrice }} €</strong></p>
                 </div>
-                <div class="d-flex align-items-center justify-content-center mt-3">
-                    <!-- <button class="cm-button">Conferma l'ordine</button> -->
-                    <button class="cm-button w-75">Vai al pagamento</button>
-                </div>
             </section>
-        </form>
+        </div>
+
+        <div class="right-content">
+            <!-- form e metodo di pagamento  -->
+            <Braintree />
+        </div>
     </div>
 
-    
+
 </template>
 
 <style lang='scss' scoped>
 @use '../../assets/scss/_vars.scss' as *;
 
 .cart-container {
-    min-height: 30.5vh;
+    min-height: 36vh;
 }
 .orange {
     color: #f48c06;
@@ -208,6 +179,9 @@ hr {
 
 .left-content {
     flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .right-content {
@@ -240,57 +214,42 @@ hr {
     margin-left: 5px;
 }
 
-//inputs 
-
-.cm-input {
-    border: 1px solid rgba(128, 128, 128, 0.349);
-    border-radius: 40px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.11);
-    overflow: hidden;
-    padding: 10px 20px;
-    margin-bottom: 1rem;
-    width: 100%;
-    display: flex;
-    margin-top: .2rem;
-
-}
 
 //pagamento
 
-.button {
-    cursor: pointer;
-    font-weight: 500;
-    left: 3px;
-    line-height: inherit;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-    display: inline-block;
-}
+// .button {
+//     cursor: pointer;
+//     font-weight: 500;
+//     left: 3px;
+//     line-height: inherit;
+//     position: relative;
+//     text-decoration: none;
+//     text-align: center;
+//     border-style: solid;
+//     border-width: 1px;
+//     border-radius: 3px;
+//     // -webkit-appearance: none;
+//     // -moz-appearance: none;
+//     display: inline-block;
+// }
 
-.button--small {
-    padding: 10px 20px;
-    font-size: 0.875rem;
-}
+// .button--small {
+//     padding: 10px 20px;
+//     font-size: 0.875rem;
+// }
 
-.button--green {
-    outline: none;
-    background-color: #f48c06;
-    border-color: #f48c06;
-    color: white;
-    transition: all 200ms ease;
-}
+// .button--green {
+//     outline: none;
+//     background-color: #f48c06;
+//     border-color: #f48c06;
+//     color: white;
+//     transition: all 200ms ease;
+// }
 
-.button--green:hover {
-    background-color: #d67c06;
-    color: white;
-}
+// .button--green:hover {
+//     background-color: #d67c06;
+//     color: white;
+// }
 
 
 

@@ -14,27 +14,29 @@ export default {
         }
     },
     mounted() {
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
+        const savedStore = localStorage.getItem('store');
+        if (savedStore) {
             try {
-                store.cart = JSON.parse(savedCart);
+                // Parse the saved store object from local storage
+                const parsedStore = JSON.parse(savedStore);
+                // Update each property of the reactive store with the parsed values
+                Object.assign(store, parsedStore);
             } catch (error) {
-                console.error('Error parsing cart data from local storage:', error);
+                console.error('Error parsing store data from local storage:', error);
             }
         }
         setTimeout(() => {
             this.isLoading = false;
-        }, 1000);
+        }, 1000)
     },
     watch: {
-        'store.cart': {
-            handler(newCart) {
-                localStorage.setItem('cart', JSON.stringify(newCart));
+        store: {
+            handler(newStore) {
+                localStorage.setItem('store', JSON.stringify(newStore));
             },
             deep: true
         }
-        
-    }
+    },
 }
 </script>
 
