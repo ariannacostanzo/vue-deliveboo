@@ -9,10 +9,10 @@ export default {
             store,
             clientToken: null,
             errorMessage: null,
-            successMessage: null,
             customer_info: {customer_name: '', customer_surname: '', customer_address: '', customer_email: '', customer_phone: '' },
             order_dishes: [],
-            errorBag: {name_error: '', surname_error: '', address_error: '', email_error: '', phone_error: ''}
+            errorBag: {name_error: '', surname_error: '', address_error: '', email_error: '', phone_error: ''},
+            areThereErrors: false
         }
 
     },
@@ -37,29 +37,32 @@ export default {
                 }
                 // Attach event listener after Drop-in UI instance is created
                 button.addEventListener('click', () => {
+                    
                     instance.requestPaymentMethod((err, payload) => {
                         if (err) {
                             console.error('Error during payment request:', err);
                             // button.value = payload.nonce;
                             return;
                         }
-                        
+                        if (this.areThereErrors) {
+                            return
+                        }
                         this.sendPayment(payload.nonce);
                     });
                 });
             });
         },
         sendPayment(nonce) {
+            
             axios.post('http://localhost:8000/api/get-clientToken', { nonce })
                 .then(response => {
-                    // console.log('Pagamento elaborato con successo:', response.data);
                     this.successMessage = 'Pagamento elaborato con successo.'
                     this.collectOrderData();
                     store.orderSuccesfull = 'Il tuo ordine è in preparazione...'
                     store.cart = []
+                    window.scrollTo(0, 0);
                     this.$router.push('/')
                 }).catch(error => {
-                    // console.error('Errore durante l\'elaborazione del pagamento: ', error);
                     this.errorMessage = 'Errore durante l\'elaborazione del pagamento. Riprova'
                 });
         },
@@ -70,9 +73,74 @@ export default {
             //! validazione 
         },
         validationOrderFields() {
+
+            let nameError = false;
+            let surnameError = false;
+            let addressError = false;
+            let emailError = false;
+            let phoneError = false;
+
+            //validazione nome
+
             if(this.customer_info.customer_name === '') {
                 this.errorBag.name_error = 'Inserisci il tuo nome'
-                return
+                nameError = true;
+            } else if (this.customer_info.customer_name.length < 3 || this.customer_info.customer_name.length > 50 || /^\d+$/.test(this.customer_info.customer_name)) {
+                this.errorBag.name_error = 'Il nome inserito non è valido'
+                nameError = true;
+            } else {
+                nameError = false;
+                this.errorBag.name_error = '';
+            }
+            //validazione cognome
+            if(this.customer_info.customer_surname === '') {
+                this.errorBag.surname_error = 'Inserisci il tuo cognome'
+                surnameError = true;
+            } else if (this.customer_info.customer_surname.length < 3 || this.customer_info.customer_surname.length > 50 || /^\d+$/.test(this.customer_info.customer_surname)) {
+                this.errorBag.surname_error = 'Il cognome inserito non è valido'
+                surnameError = true;
+            } else {
+                surnameError = false;
+                this.errorBag.surname_error = '';
+            }
+            //validazione indirizzo
+            if(this.customer_info.customer_address === '') {
+                this.errorBag.address_error = 'Inserisci il tuo indirizzo'
+                addressError = true;
+            } else if (this.customer_info.customer_address.length < 3 || this.customer_info.customer_address.length > 150 || /^\d+$/.test(this.customer_info.customer_address)) {
+                this.errorBag.address_error = 'l\'indirizzo non è valido'
+                addressError = true;
+            } else {
+                addressError = false;
+                this.errorBag.address_error = '';
+            }
+            //validazione email
+            if(this.customer_info.customer_email === '') {
+                this.errorBag.email_error = 'Inserisci la tua email'
+                emailError = true;
+            } else if (this.customer_info.customer_email.length < 3 || this.customer_info.customer_email.length > 100 || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(this.customer_info.customer_email)) {
+                this.errorBag.email_error = 'l\'email non è valida'
+                emailError = true;
+            } else {
+                emailError = false;
+                this.errorBag.email_error = '';
+            }
+            //validazione telefono
+            if(this.customer_info.customer_phone === '') {
+                this.errorBag.phone_error = 'Inserisci il tuo numero di telefono'
+                phoneError = true;
+            } else if (this.customer_info.customer_phone.length > 15 ) {
+                this.errorBag.phone_error = 'Il numero di telefono non è valido'
+                phoneError = true;
+            } else {
+                phoneError = false;
+                this.errorBag.phone_error = '';
+            }
+
+            if (nameError || surnameError || addressError || emailError || phoneError) {
+            this.areThereErrors = true;
+            } else {
+                this.areThereErrors = false;
             }
         }
     },
@@ -108,13 +176,13 @@ export default {
                 <label for="surname">Cognome</label>
                 <input type="text" class="cm-input" id="surname" name="customer_surname" required
                     v-model="customer_info.customer_surname"></input>
-                <p v-if="errorBag.surname_error">{{ errorBag.surname_error }}</p>
+                <p v-if="errorBag.surname_error" class="form-errors">{{ errorBag.surname_error }}</p>
             </div>
             <div class="cm-input-group col">
                 <label for="address">Indirizzo</label>
                 <input type="text" class="cm-input" id="address" placeholder="via Roma 15" name="customer_address"
                     required v-model="customer_info.customer_address"></input>
-                <p v-if="errorBag.address_error">{{ errorBag.address_error }}</p>
+                <p v-if="errorBag.address_error" class="form-errors">{{ errorBag.address_error }}</p>
             </div>
             <div class="cm-input-group col">
                 <label for="city">Città</label>
@@ -125,13 +193,13 @@ export default {
                 <label for="email">Email</label>
                 <input type="email" class="cm-input" id="email" name="customer_email" required
                     v-model="customer_info.customer_email"></input>
-                <p v-if="errorBag.email_error">{{ errorBag.email_error }}</p>
+                <p v-if="errorBag.email_error" class="form-errors">{{ errorBag.email_error }}</p>
             </div>
             <div class="cm-input-group col">
                 <label for="phone_number">Numero di telefono</label>
                 <input type="text" class="cm-input" id="phone_number" placeholder="+39315224451"
                     name="customer_phone_number" required v-model="customer_info.customer_phone"></input>
-                <p v-if="errorBag.phone_error">{{ errorBag.phone_error }}</p>
+                <p v-if="errorBag.phone_error" class="form-errors">{{ errorBag.phone_error }}</p>
             </div>
         </div>
 
@@ -146,10 +214,7 @@ export default {
                     id="submit-button" class="cm-button w-75" @click="submitPayment">Invia ordine</button> </div>
 
             <div class="my-5 text-center">
-                <div v-if="successMessage" class="cm-alert success">
-                    <p class="">{{ successMessage }}</p>
-                </div>
-                <div v-if="errorMessage" class="cm-alert fail">
+                <div v-if="errorMessage" class="cm-alert-fail">
                     <p class="">{{ errorMessage }}</p>
                 </div>
             </div>
@@ -158,23 +223,15 @@ export default {
 </template>
 
 <style lang='scss' scoped>
-.cm-alert {
+.cm-alert-fail {
     padding: 1rem;
     border-width: 2px;
     border-style: solid;
+    border: 2px solid red;
+    color: red;
     border-radius: 10px;
     p {
         margin: 0;
-    }
-
-    &.success {
-        border-color: green;
-        color: green;
-    }
-
-    &.fail {
-        border-color: red;
-        color: red;
     }
 }
 

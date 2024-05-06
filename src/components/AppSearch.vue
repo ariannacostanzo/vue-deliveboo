@@ -83,6 +83,28 @@ export default {
 
         // Carica tutti i ristoranti all'avvio
         this.fetchRestaurants();
+    },
+    //store in localStorage
+    mounted() {
+        const savedStore = localStorage.getItem('store');
+        if (savedStore) {
+            try {
+                // Parse the saved store object from local storage
+                const parsedStore = JSON.parse(savedStore);
+                // Update each property of the reactive store with the parsed values
+                Object.assign(store, parsedStore);
+            } catch (error) {
+                console.error('Error parsing store data from local storage:', error);
+            }
+        }
+    },
+    watch: {
+        store: {
+            handler(newStore) {
+                localStorage.setItem('store', JSON.stringify(newStore));
+            },
+            deep: true
+        }
     }
 }
 </script>
