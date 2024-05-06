@@ -110,12 +110,30 @@ import {store} from '../../store.js'
 
             </section>
 
-            <section id="payment" v-if="store.cart.length !== 0">
-                <h2>Metodo di pagamento</h2>
-                <Braintree />
-                <!-- <div id="dropin-container"></div>
-                <button id="submit-button" class="button button--small button--green">Purchase</button> -->
+            <!-- riepilogo  -->
+            <section id="overview" v-if="store.cart.length !== 0">
+                <h2>Riepilogo</h2>
+                <div class="d-flex align-items-center justify-content-between ">
+                    <p>Prodotto</p>
+                    <p>{{ getTotalPrice }} €</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between ">
+                    <p>Consegna</p>
+                    <p><span class="discount">2,99€</span><span class="gratis">GRATIS</span></p>
+                </div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                    <p><strong>TOTALE</strong></p>
+                    <p><strong>{{ getTotalPrice }} €</strong></p>
+                </div>
+                <div class="d-flex align-items-center justify-content-center mt-3">
+                    <!-- <button class="cm-button">Conferma l'ordine</button> 
+                    <button class="cm-button w-75">Vai al pagamento</button>-->
+
+
+                </div>
             </section>
+
 
 
         </div>
@@ -159,29 +177,12 @@ import {store} from '../../store.js'
 
             </section>
 
-            <!-- riepilogo  -->
-            <section id="overview" v-if="store.cart.length !== 0">
-                <h2>Riepilogo</h2>
-                <div class="d-flex align-items-center justify-content-between ">
-                    <p>Prodotto</p>
-                    <p>{{ getTotalPrice }} €</p>
-                </div>
-                <div class="d-flex align-items-center justify-content-between ">
-                    <p>Consegna</p>
-                    <p><span class="discount">2,99€</span><span class="gratis">GRATIS</span></p>
-                </div>
-                <hr>
-                <div class="d-flex align-items-center justify-content-between">
-                    <p><strong>TOTALE</strong></p>
-                    <p><strong>{{ getTotalPrice }} €</strong></p>
-                </div>
-                <div class="d-flex align-items-center justify-content-center mt-3">
-                    <!-- <button class="cm-button">Conferma l'ordine</button> 
-                    <button class="cm-button w-75">Vai al pagamento</button>-->
-
-
-                </div>
+            <section id="payment" v-if="store.cart.length !== 0">
+                <h2>Metodo di pagamento</h2>
+                <Braintree />
             </section>
+
+
         </div>
     </div>
 
@@ -212,6 +213,9 @@ hr {
 
 .left-content {
     flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .right-content {

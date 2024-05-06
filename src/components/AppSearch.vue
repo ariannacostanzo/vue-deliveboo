@@ -3,11 +3,13 @@ import axios from 'axios';
 import { RouterLink } from 'vue-router';
 import Jumbotron from './Jumbotron.vue';
 import Loader from './Loader.vue';
+import {store} from '../store.js';
 
 export default {
     name: 'AppSearch',
     data() {
         return {
+            store,
             searchTerm: '',
             restaurants: [],
             types: [],
@@ -87,6 +89,11 @@ export default {
 
 <template>
     <Jumbotron />
+    <div class="container my-5 d-flex align-items-end justify-content-center gap-3" v-if="store.orderSuccesfull">
+        <p class="prepairing_order">{{ store.orderSuccesfull }}</p>
+        <img src="../assets/preparing_white.gif" alt=""
+            width="100px">
+    </div>
     <div class="search-section">
         <!-- Search Bar -->
         <div class="container d-flex justify-content-center flex-column text-center mt-5">
@@ -148,6 +155,12 @@ export default {
 </template>
 
 <style lang='scss' scoped>
+
+.prepairing_order {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #F48C06;
+}
 a {
     text-decoration: none;
     color: #212529;

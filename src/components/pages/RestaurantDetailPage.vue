@@ -38,7 +38,7 @@ export default {
                 });
         },
         addToCart(dish) {
-            
+            store.orderSuccesfull = null;
             const { id, name, price, restaurant_id } = dish;
             if(store.cart.length > 0) {
                 if (store.currentRestaurantId === restaurant_id) {
@@ -55,6 +55,7 @@ export default {
                     // this.isDeleteModalVisible = true;
                     if (window.confirm('Non puoi ordinare da due ristoranti diversi. Per ordinare qui l\'ordine precedente verrà cancellato')) {
                         this.store.cart = [];
+                        
                         store.currentRestaurantId = null;
                         this.addToCart(dish)
                     } else {
