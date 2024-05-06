@@ -16,7 +16,7 @@ import {store} from '../../store.js'
             store.cart.forEach(dish => {
                 totalPrice += parseFloat(dish.price) * dish.quantity;
             })
-            store.totalPrice = totalPrice.toFixed(2);
+            store.totalPrice = parseInt(totalPrice.toFixed(2));
             return store.totalPrice
         },
     },

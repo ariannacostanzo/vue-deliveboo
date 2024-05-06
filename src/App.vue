@@ -16,6 +16,7 @@ export default {
       store
     };
   },
+  
   //store in localStorage
   mounted() {
     const savedStore = localStorage.getItem('store');

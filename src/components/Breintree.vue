@@ -60,7 +60,6 @@ export default {
                     this.collectOrderData();
                     store.orderSuccesfull = 'Il tuo ordine è in preparazione...'
                     store.cart = []
-                    window.scrollTo(0, 0);
                     this.$router.push('/')
                 }).catch(error => {
                     this.errorMessage = 'Errore durante l\'elaborazione del pagamento. Riprova'
@@ -70,7 +69,36 @@ export default {
             this.validationOrderFields();
         },
         collectOrderData() {
-            //! validazione 
+            const dishes = [];
+
+            store.cart.forEach(item => {
+                const dish = {
+                    id: item.id,
+                    quantity: item.quantity
+                }
+
+                dishes.push(dish);
+            })
+            const orderData = {
+                customer_info: {
+                    customer_name: this.customer_info.customer_name,
+                    customer_surname: this.customer_info.customer_surname,
+                    customer_address: this.customer_info.customer_address,
+                    customer_email: this.customer_info.customer_email,
+                    customer_phone_number: this.customer_info.customer_phone,
+                },
+                order_info: {
+                    total: store.totalPrice,
+                    dishes: dishes
+                }
+            }
+            
+            axios.post('http://localhost:8000/api/getNewOrder', orderData)
+                .then(response => {
+                    console.log('Order placed successfully:', response.data);
+                }).catch(error => {
+                    console.error('Error placing order:', error);
+                });
         },
         validationOrderFields() {
 

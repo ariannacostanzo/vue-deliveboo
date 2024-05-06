@@ -17,6 +17,9 @@ const router = createRouter({
     { path: "/restaurants/:id", component: RestaurantDetailPage, name: "restaurant-detail"},
     { path: "/:pathMatch(.*)*", redirect: { name: "home-page" } },
   ],
+  scrollBehavior(to, from) {
+    return {top: 0}
+  }
 });
 
 //lo esporto
