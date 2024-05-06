@@ -18,18 +18,19 @@ export default {
     components: { Jumbotron, Loader },
     methods: {
         async searchRestaurants() {
-            if (this.searchTerm.trim() !== '') {
-                try {
-                    const response = await axios.get('http://localhost:8000/api/restaurants');
-                    this.restaurants = response.data.filter(restaurant =>
-                        restaurant.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-                    );
-                } catch (error) {
-                    console.error(error);
-                } then (this.isLoading = false)
-            } else {
-                // Aggiorna la lista completa se la barra di ricerca è vuota
-                this.fetchRestaurants();
+            try {
+                this.isLoading = true;
+                const response = await axios.get('http://localhost:8000/api/restaurants', {
+                    params: {
+                        searchTerm: this.searchTerm,
+                        filters: this.selectedFilters
+                    }
+                });
+                this.restaurants = response.data;
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.isLoading = false;
             }
         },
         async fetchTypes() {
@@ -40,6 +41,7 @@ export default {
                 console.error(error);
             }
         },
+
         toggleFilter(filter) {
             const index = this.selectedFilters.indexOf(filter.toLowerCase());
             if (index === -1) {
@@ -51,16 +53,17 @@ export default {
         isFilterSelected(filter) {
             return this.selectedFilters.includes(filter.toLowerCase());
         },
-        async fetchRestaurants() {
-            try {
-                const response = await axios.get('http://localhost:8000/api/restaurants');
-                this.restaurants = response.data;
-            } catch (error) {
-                console.error(error);
+        updateFilteredRestaurants() {
+            if (this.selectedFilters.length > 0) {
+                this.restaurants = this.restaurants.filter(restaurant => {
+                    return this.selectedFilters.every(filter => {
+                        return restaurant.types.some(type => type.label.toLowerCase() === filter.toLowerCase());
+                    });
+                });
+            } else {
+                // Se non ci sono filtri selezionati, visualizza tutti i ristoranti
+                this.searchRestaurants();
             }
-        },
-        restaurantDetail(restaurant) {
-            this.$router.push({ name: 'detail-restaurant', params: { id: restaurant.id } });
         },
     },
     computed: {
@@ -78,9 +81,7 @@ export default {
     },
     created() {
         this.fetchTypes();
-
-        // Carica tutti i ristoranti all'avvio
-        this.fetchRestaurants();
+        this.searchRestaurants();
     }
 }
 </script>
@@ -106,8 +107,8 @@ export default {
                 <button v-for="type in types" :key="type.id" @click="toggleFilter(type.label)"
                     :class="{ 'filter-button active': isFilterSelected(type.label), 'filter-button': !isFilterSelected(type.label) }">
                     <i :class="['fas', type.icon]"></i> {{ type.label }}
-                    <span v-if="isFilterSelected(type.label)" @click.stop="toggleFilter(type.label)"
-                        class="close-filter"><i class="fa-solid fa-x"></i></span>
+                    <span v-if="isFilterSelected(type.label)" @click="toggleFilter(type.label)" class="close-filter"><i
+                            class="fa-solid fa-x"></i></span>
                 </button>
             </div>
 
