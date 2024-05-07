@@ -32,8 +32,6 @@ import {store} from '../../store.js'
                 totalPrice += dish.price * dish.quantity;
             })
             store.totalPrice = (parseFloat(totalPrice));
-            console.log(store.totalPrice)
-            console.log(totalPrice)
         }
     },
     //store in localStorage
@@ -49,7 +47,6 @@ import {store} from '../../store.js'
                 console.error('Error parsing store data from local storage:', error);
             }
         }
-        console.log(store.totalPrice)
         this.updatePrice()
         
     },

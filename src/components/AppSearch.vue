@@ -116,7 +116,7 @@ export default {
         <div @click="this.$router.push('/overview')">
                 <p class="prepairing_order">Segui il tuo ordine <i class="fa-solid fa-arrow-down"></i></p>
                 <div class="fixed-order-img">
-                    <img src="../assets/preparing_png.gif" alt="" width="110px">
+                    <img src="../assets/preparing_png.gif" alt="" >
                 </div>
         </div>
     </div>
@@ -185,7 +185,7 @@ export default {
 
 
 .prepairing_order {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: black;
     transition: .4s ease;
@@ -195,8 +195,8 @@ export default {
 .fixed-order {
     position: fixed;
     z-index: 99;
-    right: 40px;
-    bottom: 40px;
+    right: 10px;
+    bottom: 10px;
     
 
     
@@ -205,11 +205,34 @@ export default {
 .fixed-order-img {
     transition: .3s ease-in-out;
     border-radius: 50%;
-    padding: 1rem .5rem;
+    padding: .5rem .25rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    img {
+        width: 80px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .prepairing_order {
+        font-size: 16px;
+    }
+    .fixed-order {
+            position: fixed;
+            z-index: 99;
+            right: 40px;
+            bottom: 40px;
+    
+    
+        }
+    .fixed-order-img {
+            
+            img {
+                width: 110px;
+            }
+        }
 }
 
 .fixed-order:hover .fixed-order-img {
