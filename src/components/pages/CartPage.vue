@@ -10,16 +10,6 @@ import {store} from '../../store.js'
             store,
         }
     },
-    computed: {
-        getTotalPrice() {
-            let totalPrice = 0;
-            store.cart.forEach(dish => {
-                totalPrice += parseFloat(dish.price) * dish.quantity;
-            })
-            store.totalPrice = parseInt(totalPrice.toFixed(2));
-            return store.totalPrice
-        },
-    },
     methods: {
         changeQuantity(mode, dish_id) {
             const dish = this.store.cart.find(item => item.id === dish_id);
@@ -33,6 +23,17 @@ import {store} from '../../store.js'
             } else {
                 dish.quantity++;
             }
+            this.updatePrice()
+
+        },
+        updatePrice() {
+            let totalPrice = 0;
+            store.cart.forEach(dish => {
+                totalPrice += dish.price * dish.quantity;
+            })
+            store.totalPrice = (parseFloat(totalPrice));
+            console.log(store.totalPrice)
+            console.log(totalPrice)
         }
     },
     //store in localStorage
@@ -48,6 +49,9 @@ import {store} from '../../store.js'
                 console.error('Error parsing store data from local storage:', error);
             }
         }
+        console.log(store.totalPrice)
+        this.updatePrice()
+        
     },
     watch: {
         store: {
@@ -95,7 +99,7 @@ import {store} from '../../store.js'
             </nav>
         </span>
     </div>
-    <div class="container cart-container" v-if="store.cart.length === 0">
+    <div class="container cart-container" v-if="store.cart.length === 0 || store.orderSuccesfull">
         <h2>Nessun ordine</h2>
     </div>
     <div class="container mb-5 d-md-flex justify-content-between gap-5" v-else>
@@ -132,7 +136,7 @@ import {store} from '../../store.js'
                 <h2>Riepilogo</h2>
                 <div class="d-flex align-items-center justify-content-between ">
                     <p>Prodotto</p>
-                    <p>{{ getTotalPrice }} €</p>
+                    <p>{{ (store.totalPrice).toFixed(2) }} €</p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between ">
                     <p>Consegna</p>
@@ -141,7 +145,7 @@ import {store} from '../../store.js'
                 <hr>
                 <div class="d-flex align-items-center justify-content-between">
                     <p><strong>TOTALE</strong></p>
-                    <p><strong>{{ getTotalPrice }} €</strong></p>
+                    <p><strong>{{ (store.totalPrice).toFixed(2) }} €</strong></p>
                 </div>
             </section>
         </div>

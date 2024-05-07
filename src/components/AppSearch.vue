@@ -111,10 +111,14 @@ export default {
 
 <template>
     <Jumbotron />
-    <div class="container my-5 d-flex align-items-end justify-content-center gap-3" v-if="store.orderSuccesfull">
-        <p class="prepairing_order">{{ store.orderSuccesfull }}</p>
-        <img src="../assets/preparing_white.gif" alt=""
-            width="100px">
+    <!-- dettagli ordine  -->
+    <div class="fixed-order" v-if="store.orderSuccesfull">
+        <div @click="this.$router.push('/overview')">
+                <p class="prepairing_order">Segui il tuo ordine <i class="fa-solid fa-arrow-down"></i></p>
+                <div class="fixed-order-img">
+                    <img src="../assets/preparing_png.gif" alt="" width="110px">
+                </div>
+        </div>
     </div>
     <div class="search-section">
         <!-- Search Bar -->
@@ -178,11 +182,40 @@ export default {
 
 <style lang='scss' scoped>
 
+
+
 .prepairing_order {
-    font-size: 2rem;
+    font-size: 16px;
     font-weight: bold;
-    color: #F48C06;
+    color: black;
+    transition: .4s ease;
+    visibility: visible;
 }
+
+.fixed-order {
+    position: fixed;
+    z-index: 99;
+    right: 40px;
+    bottom: 40px;
+    
+
+    
+}
+
+.fixed-order-img {
+    transition: .3s ease-in-out;
+    border-radius: 50%;
+    padding: 1rem .5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-order:hover .fixed-order-img {
+    background-color: #f48c06;
+}
+
 a {
     text-decoration: none;
     color: #212529;
@@ -379,4 +412,14 @@ a {
     border-radius: 15px;
 
 }
+
+.bg-light-orange {
+    background-color: #fff9e6;
+    padding: 1.5rem;
+    border-radius: 10px;
+
+    
+}
+
+
 </style>
