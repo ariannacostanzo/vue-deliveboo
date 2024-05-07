@@ -59,8 +59,8 @@ export default {
                     this.successMessage = 'Pagamento elaborato con successo.'
                     this.collectOrderData();
                     store.orderSuccesfull = 'Il tuo ordine è in preparazione...'
-                    store.cart = []
-                    this.$router.push('/')
+                    this.$router.push('/overview')
+                    // store.cart = []
                 }).catch(error => {
                     this.errorMessage = 'Errore durante l\'elaborazione del pagamento. Riprova'
                 });
@@ -92,6 +92,8 @@ export default {
                     dishes: dishes
                 }
             }
+
+            store.customerInformation = this.customer_info;
             
             axios.post('http://localhost:8000/api/getNewOrder', orderData)
                 .then(response => {
@@ -253,8 +255,6 @@ export default {
 <style lang='scss' scoped>
 .cm-alert-fail {
     padding: 1rem;
-    border-width: 2px;
-    border-style: solid;
     border: 2px solid red;
     color: red;
     border-radius: 10px;

@@ -6,5 +6,6 @@ export const store = reactive({
     totalPrice: 0,
     currentRestaurantId: null,
     restaurantName: null,
-    orderSuccesfull: null
+    orderSuccesfull: null,
+    customerInformation: {}
 })
