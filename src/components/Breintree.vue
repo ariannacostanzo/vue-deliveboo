@@ -97,9 +97,9 @@ export default {
             
             axios.post('http://localhost:8000/api/getNewOrder', orderData)
                 .then(response => {
-                    console.log('Order placed successfully:', response.data);
+                    // console.log('Order placed successfully:', response.data);
                 }).catch(error => {
-                    console.error('Error placing order:', error);
+                    // console.error('Error placing order:', error);
                 });
         },
         validationOrderFields() {
