@@ -45,7 +45,6 @@
                 <p>Siamo lieti di informarla che il suo ordine è stato ricevuto ed è attualmente in preparazione! Grazie
                     per aver scelto <strong>DeliveBoo</strong>!
                 </p>
-                <img src="../../assets/preparing_png.gif" alt="" width="100px">
             </div>
         </div>
 
@@ -139,7 +138,7 @@ section {
 }
 
 .full-height {
-    height: 35.8vh;
+    height: 35.75vh;
 }
 
 </style>

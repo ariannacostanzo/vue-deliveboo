@@ -48,7 +48,7 @@ export default {
 
 
         <!--SVG UPPER WAVE-->
-        <div class="background-wave " >
+        <div class="background-wave ">
             <svg class="upper" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#fff9e6" fill-opacity="1" d="M0,288L48,293.3C96,299,192,309,288,
                 304C384,299,480,277,576,245.3C672,213,768,171,864,170.7C960,171,
@@ -188,8 +188,8 @@ export default {
                             food delivery, avrai l'opportunità di raggiungere un vasto pubblico di clienti affamati,
                             garantendo una visibilità senza precedenti per il tuo ristorante. Unisciti a noi per
                             offrire ai clienti la comodità di gustare i tuoi piatti eccezionali direttamente a casa
-                            loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso!</p>
-                        <a class="work-card-hover__link">
+                            loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso! </p>
+                        <a class="work-card-hover__link" href="http://localhost:8000">
                             <span>Diventa partner</span>
                             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
