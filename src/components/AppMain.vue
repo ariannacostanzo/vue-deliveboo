@@ -189,7 +189,7 @@ export default {
                             garantendo una visibilità senza precedenti per il tuo ristorante. Unisciti a noi per
                             offrire ai clienti la comodità di gustare i tuoi piatti eccezionali direttamente a casa
                             loro. Scegli la crescita, scegli di diventare nostro partner oggi stesso! </p>
-                        <a class="work-card-hover__link" href="http://localhost:8000">
+                        <a class="work-card-hover__link" href="http://localhost:8000" target="_blank">
                             <span>Diventa partner</span>
                             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
