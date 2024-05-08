@@ -60,7 +60,7 @@
                             <p><strong>{{ dish.quantity}}x</strong></p>
                             <p>{{ dish.name }}</p>
                         </div>
-                        <p>{{ dish.price}}€</p>
+                        <p>{{ (dish.price).toFixed(2) }}€</p>
                     </div>
                     <hr>
                     <div class="d-flex align-items-center justify-content-between">
