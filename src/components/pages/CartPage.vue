@@ -160,7 +160,7 @@ import {store} from '../../store.js'
 @use '../../assets/scss/_vars.scss' as *;
 
 .cart-container {
-    min-height: 36vh;
+    min-height: 35.8vh;
 }
 .orange {
     color: #f48c06;

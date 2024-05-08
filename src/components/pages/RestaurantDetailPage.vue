@@ -38,63 +38,67 @@ export default {
                 });
         },
         addToCart(dish) {
-            
+            //se ho già qualcosa nel carrello controllo se è dello stesso ristorante o meno
             const { id, name, price, restaurant_id } = dish;
             if(store.cart.length > 0) {
                 if (store.currentRestaurantId === restaurant_id) {
                     const existingItem = this.store.cart.find(item => item.id === id);
                     if (existingItem) {
-                        existingItem.quantity += this.currentDishQuantity;
-                        // localStorage.cart = JSON.stringify(this.store.cart)
+                        existingItem.quantity += parseInt(this.currentDishQuantity);
                     } else {
-                        store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
+                        store.cart.push({ id, name, price: parseInt(price), quantity: parseInt(this.currentDishQuantity), restaurant_id });
                         store.restaurantName = this.restaurants.name
-                        // localStorage.cart = JSON.stringify(this.store.cart)
                     }
+                    this.closeModal();
                 } else {
-                    // this.isDeleteModalVisible = true;
-                    if (window.confirm('Non puoi ordinare da due ristoranti diversi. Per ordinare qui l\'ordine precedente verrà cancellato')) {
-                        this.store.cart = [];
-                        store.orderSuccesfull = null;
-                        store.currentRestaurantId = null;
-                        this.addToCart(dish)
-                    } else {
-                        return
-                    }
-                    
+                    this.isDeleteModalVisible = true;
                 }
-
+            //altrimenti aggiungo il piatto al carrello
             } else {
-                store.cart.push({ id, name, price, quantity: this.currentDishQuantity, restaurant_id });
+                store.cart.push({ id, name, price: parseInt(price), quantity: parseInt(this.currentDishQuantity), restaurant_id });
                 store.currentRestaurantId = restaurant_id;
                 store.restaurantName = this.restaurants.name
-                
+                this.closeModal();
             }
             
-            this.closeModal();
+            
         },
+        //se confermo la modale di cancellazione svuoto il carrello e aggiungo il piatto del nuovo ristorante
+        confirmDeleteModal(mode) {
+            if(mode === 'yes') {
+                this.isDeleteModalVisible = false;
+                this.store.cart = [];
+                store.orderSuccesfull = null;
+                store.currentRestaurantId = null;
+                this.addToCart(this.currentDish)
+                this.closeModal();
+            } else {
+                this.isDeleteModalVisible = false;
+            }
+        },
+        //riempio dinamicamente la modale
         populateModal(dish) {
             this.isModalVisible = true
-
             this.currentDish = dish;
         },
         closeModal() {
             this.isModalVisible = false;
-
             this.currentDish = null;
             this.currentDishQuantity = 1;
 
         },
         changeQuantity(mode) {
+            let convertedQuantity = parseInt(this.currentDishQuantity)
             if (mode === 'less') {
-                if (this.currentDishQuantity === 1) {
+                if (convertedQuantity === 1) {
                     return
                 } else {
-                    this.currentDishQuantity--;
+                    convertedQuantity--;
                 }
             } else {
-                this.currentDishQuantity++;
+                convertedQuantity++;
             }
+            this.currentDishQuantity = convertedQuantity
         }
     },
     created() {
@@ -106,9 +110,7 @@ export default {
         const savedStore = localStorage.getItem('store');
         if (savedStore) {
             try {
-                // Parse the saved store object from local storage
                 const parsedStore = JSON.parse(savedStore);
-                // Update each property of the reactive store with the parsed values
                 Object.assign(store, parsedStore);
             } catch (error) {
                 console.error('Error parsing store data from local storage:', error);
@@ -141,8 +143,6 @@ export default {
         </section>
 
 
-        <!-- <img v-if="restaurants.image" :src="restaurants.image" :alt="restaurants.name"
-        class="img-fluid mx-auto d-block mb-5" style="width: 500px"> -->
         <h4 class="text-center  my-5">Scegli cosa ordinare</h4>
         <div class="container mb-5">
             <span class="orange">
@@ -189,9 +189,9 @@ export default {
                         <span class="dish-option" @click="changeQuantity('less')">
                             <i class="fa-solid fa-minus"></i>
                         </span>
-                        <!-- <input type="text" class="dish-quantity" 
-                            v-model="(currentDishQuantity)"> -->
-                        <span>{{ currentDishQuantity }}</span>
+                        <input type="text" class="dish-quantity" 
+                            v-model="currentDishQuantity">
+                        <!-- <span>{{ currentDishQuantity }}</span> -->
                         <span class="dish-option" @click="changeQuantity('more')">
                             <i class="fa-solid fa-plus"></i>
                         </span>
@@ -210,8 +210,8 @@ export default {
                     <p>Non puoi ordinare da ristoranti diversi. Per ordinare qui l'ordine precedente verrà cancellato
                     </p>
                     <div class="d-flex align-items-center justify-content-between">
-                        <button class="cm-button">Conferma</button>
-                        <button class="cm-button">Annulla</button>
+                        <button class="cm-button" @click="confirmDeleteModal('yes')">Conferma</button>
+                        <button class="cm-button" @click="confirmDeleteModal('no')">Annulla</button>
                     </div>
                 </div>
             </div>
